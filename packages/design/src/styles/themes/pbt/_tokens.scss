@@ -1,3 +1,4 @@
+@use '../../density';
 @use '../../theme';
 
 @include theme.scope('pbt') {
@@ -57,4 +58,6 @@
   --x-cut-lg: 0px;
   --x-blur: none;
   --x-shadow: 0 16px 32px -16px rgb(0 0 0 / 70%);
+
+  @include density.set('compact');
 }

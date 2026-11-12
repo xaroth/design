@@ -1,0 +1,27 @@
+// Row spacing and text size for parts that list many values. Utilities apply a density to an area; a theme may
+// include one as its default.
+@use 'sass:map';
+
+$densities: (
+  'comfortable': (
+    'row-pad': 8px,
+    'row-gap': var(--x-space-2),
+    'fs': 0.9375rem,
+  ),
+  'compact': (
+    'row-pad': 4px,
+    'row-gap': var(--x-space-1),
+    'fs': var(--x-fs-small),
+  ),
+  'dense': (
+    'row-pad': 2px,
+    'row-gap': 2px,
+    'fs': var(--x-fs-label),
+  ),
+);
+
+@mixin set($name) {
+  @each $key, $value in map.get($densities, $name) {
+    --x-density-#{$key}: #{$value};
+  }
+}

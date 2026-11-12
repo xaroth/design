@@ -55,6 +55,18 @@ const box = 'display: grid; gap: 12px; align-content: start'
         <p class="x-label">Stacked, dividers</p>
         <DescriptionList items={stats} dividers />
       </div>
+      <div style={box}>
+        <p class="x-label">Comfortable area</p>
+        <div class="x-density-comfortable">
+          <DescriptionList items={details} layout="inline" dividers />
+        </div>
+      </div>
+      <div style={box}>
+        <p class="x-label">Dense area</p>
+        <div class="x-density-dense">
+          <DescriptionList items={details} layout="inline" dividers />
+        </div>
+      </div>
     </div>
   )}
 </Harness>

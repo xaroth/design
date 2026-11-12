@@ -39,8 +39,11 @@ after adding a folder or an `.astro` file. `pnpm test` fails when they are out o
 
 - Classes: `x-` prefix, BEM. `x-card`, `x-card__title`, `x-card--featured`. Modifier values never overlap between props.
 - Tokens only. Core owns layout tokens (`--x-space-*`, `--x-fs-*`, `--x-control-*`, `--x-page`, `--x-gap`,
-  `--x-section`). Themes own `--x-color-*`, `--x-font-*`, `--x-track-*`, `--x-radius`, `--x-cut-*`. Theme extras (for
-  example `--x-color-spice`) are only used in that theme's partials.
+  `--x-section`, and the `--x-density-*` tokens set by the `x-density-*` utilities). Themes own `--x-color-*`,
+  `--x-font-*`, `--x-track-*`, `--x-radius`, `--x-cut-*`. Theme extras (for example `--x-color-spice`) are only used in
+  that theme's partials.
+- Density: parts that list many values read `--x-density-*` with their own size as the fallback, so themes without a
+  density render as before. A theme may pick a default with `@include density.set('compact')` in its tokens.
 - Structure is shared, look is themed. If a theme needs different HTML, add a prop (for example `layout="stacked"`),
   never theme detection in components.
 - Astro and React output identical HTML for the same props. Astro takes `class` and named slots; React takes `className`

@@ -1,0 +1,7 @@
+@use '../density';
+
+@each $name, $values in density.$densities {
+  .x-density-#{$name} {
+    @include density.set($name);
+  }
+}
