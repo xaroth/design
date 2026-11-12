@@ -5,6 +5,7 @@
   .x-empty-state {
     display: grid;
     gap: var(--x-space-3);
+    align-content: center;
     justify-items: center;
     padding: var(--x-space-7) var(--x-space-5);
     text-align: center;
