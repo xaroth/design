@@ -1,0 +1,54 @@
+@use '../../styles/layers';
+
+@layer x.core {
+  // The page never scrolls behind a workspace, so the gutter the base reserves for a scrollbar would stay empty.
+  :root:has(.x-workspace) {
+    scrollbar-gutter: auto;
+  }
+
+  // Sized by the container, not the viewport, so the narrow layout also applies where the workspace is embedded.
+  .x-workspace {
+    container: x-workspace / inline-size;
+    display: flex;
+    flex-direction: column;
+    block-size: 100dvh;
+    overflow: hidden;
+
+    &__header {
+      flex: none;
+    }
+
+    &__body {
+      display: grid;
+      flex: 1;
+      grid-template-columns: minmax(0, 1fr) clamp(280px, 30%, 400px);
+      min-block-size: 0;
+    }
+
+    &__main {
+      position: relative;
+      min-inline-size: 0;
+      min-block-size: 0;
+      overflow: hidden;
+    }
+
+    &__panel {
+      min-block-size: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      border-inline-start: 1px solid var(--x-workspace-edge, var(--x-color-line));
+    }
+
+    @container x-workspace (width < 720px) {
+      &__body {
+        grid-template-rows: minmax(0, 1fr) fit-content(40%);
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      &__panel {
+        border-block-start: 1px solid var(--x-workspace-edge, var(--x-color-line));
+        border-inline-start: 0;
+      }
+    }
+  }
+}

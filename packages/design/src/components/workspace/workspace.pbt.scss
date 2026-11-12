@@ -1,0 +1,13 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-workspace {
+    --x-workspace-edge: var(--x-color-line-strong);
+
+    background: var(--x-color-bg);
+
+    &__panel {
+      background: var(--x-color-surface);
+    }
+  }
+}
