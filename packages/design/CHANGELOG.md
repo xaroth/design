@@ -1,5 +1,26 @@
 # @xaroth.nl/design
 
+## 0.6.0
+
+### Minor Changes
+
+- [#34](https://github.com/xaroth/design/pull/34)
+  [`827f960`](https://github.com/xaroth/design/commit/827f96044e943f4bea69ee240846945633b1b59c) - Add ChoiceCard: one
+  option of a radio group drawn as a card, with a title, a short text and an optional image. Cards in a RadioGroup tile
+  as a grid.
+
+- [#36](https://github.com/xaroth/design/pull/36)
+  [`b29cb8d`](https://github.com/xaroth/design/commit/b29cb8da4fda4a06c33bc1c896fc61ca6b50d34a) - Add Workspace: an app
+  screen that fills the viewport with a header, a main region that takes the remaining space and a side panel. Only the
+  panel scrolls. Below 720px of its own width the panel moves under the main region.
+
+### Patch Changes
+
+- [#37](https://github.com/xaroth/design/pull/37)
+  [`f24392b`](https://github.com/xaroth/design/commit/f24392bf45838122401f22d34fe54b48a001223d) - Workspace: a single
+  child of the main region fills it. EmptyState: content is centered when the state is taller than it. ChoiceCard: cards
+  in a horizontal group keep the same gap between rows as between columns.
+
 ## 0.5.0
 
 ### Minor Changes
