@@ -25,8 +25,11 @@
       min-block-size: 0;
     }
 
+    // One cell, so a single child (a canvas, a placeholder) fills the region without sizing itself.
     &__main {
       position: relative;
+      display: grid;
+      grid-template: minmax(0, 1fr) / minmax(0, 1fr);
       min-inline-size: 0;
       min-block-size: 0;
       overflow: hidden;

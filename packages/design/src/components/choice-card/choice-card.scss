@@ -109,7 +109,9 @@
     gap: var(--x-space-4);
   }
 
+  // Repeats the gap: the plain horizontal group sets its own, which would otherwise win.
   .x-choice-group--horizontal .x-choice-group__options:has(> .x-choice-card) {
+    gap: var(--x-space-4);
     grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--x-choice-card-min, 14rem)), 1fr));
   }
 }
