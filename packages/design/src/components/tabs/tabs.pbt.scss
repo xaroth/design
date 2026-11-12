@@ -1,0 +1,33 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-tabs__list {
+    gap: var(--x-space-5);
+
+    // The fade starts in the gap, so it adds little scroll width.
+    &::after {
+      margin-left: calc(-1 * var(--x-space-5));
+    }
+  }
+
+  .x-tabs__link {
+    font-size: var(--x-fs-ui);
+    font-weight: 500;
+    line-height: 1.4;
+    box-shadow: inset 0 -2px 0 transparent;
+
+    &:hover {
+      color: var(--x-color-text);
+    }
+
+    &[aria-current='page'] {
+      color: var(--x-color-text);
+      box-shadow: inset 0 -2px 0 var(--x-color-accent);
+    }
+  }
+
+  .x-tabs__count {
+    font-variant-numeric: tabular-nums;
+    background: var(--x-color-surface);
+  }
+}

@@ -1,0 +1,24 @@
+// Theme entry: layout tokens, reset and base type, this theme's tokens, and its look for every part.
+// Component structure ships with each component; this file is loaded once per site.
+@use 'sass:meta';
+@use '../layers';
+@import '@fontsource-variable/onest/index.css';
+@import '@fontsource-variable/red-hat-mono/index.css';
+
+@layer x.reset {
+  @include meta.load-css('../core/reset');
+}
+
+@layer x.core {
+  @include meta.load-css('../core/tokens');
+  @include meta.load-css('../core/base');
+}
+
+@layer x.theme {
+  @include meta.load-css('pbt/tokens');
+  @include meta.load-css('pbt-parts');
+}
+
+@layer x.utility {
+  @include meta.load-css('../utilities');
+}

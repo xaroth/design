@@ -1,0 +1,31 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-button {
+    --x-button-fs: 0.875rem;
+    --x-button-tracking: 0.02em;
+    --x-button-case: none;
+  }
+
+  .x-button--primary:hover:not(:disabled, [aria-disabled='true']) {
+    --x-button-bg: color-mix(in oklab, var(--x-button-tone) 80%, white);
+
+    filter: none;
+  }
+
+  // Inactive buttons grey out instead of fading, so their text keeps its contrast.
+  .x-button:disabled,
+  .x-button[aria-disabled='true']:not(.x-button--loading) {
+    --x-button-fg: var(--x-color-text-faint);
+    --x-button-bg: var(--x-color-surface);
+    --x-button-border: var(--x-color-line-strong);
+
+    opacity: 1;
+  }
+
+  .x-button--tertiary:disabled,
+  .x-button--tertiary[aria-disabled='true']:not(.x-button--loading) {
+    --x-button-bg: transparent;
+    --x-button-border: transparent;
+  }
+}

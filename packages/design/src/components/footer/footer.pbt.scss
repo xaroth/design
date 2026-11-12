@@ -1,0 +1,26 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-footer {
+    padding-block: var(--x-space-6) var(--x-space-7);
+    border-top: 1px solid var(--x-color-line);
+  }
+
+  .x-footer__brand {
+    font-weight: 600;
+    color: var(--x-color-text);
+
+    &:hover {
+      color: var(--x-color-accent-strong);
+    }
+  }
+
+  .x-footer__link {
+    font-size: var(--x-fs-small);
+    color: var(--x-color-text-muted);
+
+    &:hover {
+      color: var(--x-color-text);
+    }
+  }
+}

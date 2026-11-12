@@ -1,0 +1,8 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-dialog__head {
+    padding-bottom: var(--x-space-3);
+    border-bottom: 1px solid var(--x-color-line);
+  }
+}

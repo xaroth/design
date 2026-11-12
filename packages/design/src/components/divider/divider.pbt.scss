@@ -1,0 +1,18 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-divider--ornament,
+  .x-divider--label {
+    --x-divider-line: var(--x-color-line-strong);
+  }
+
+  .x-divider__mark {
+    width: 6px;
+    height: 6px;
+    background: var(--x-color-accent);
+  }
+
+  .x-divider__label {
+    color: var(--x-color-text-faint);
+  }
+}

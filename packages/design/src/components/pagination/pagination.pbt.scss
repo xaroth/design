@@ -1,0 +1,14 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-pagination__link,
+  .x-pagination__gap,
+  .x-pagination__summary {
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  .x-pagination__link:where(a):not([aria-current='page']):hover {
+    color: var(--x-color-text);
+    border-color: var(--x-color-text-faint);
+  }
+}

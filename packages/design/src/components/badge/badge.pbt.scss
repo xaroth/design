@@ -1,0 +1,8 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-badge {
+    font-variant-numeric: tabular-nums;
+    background: var(--x-color-bg-sunk);
+  }
+}

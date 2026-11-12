@@ -1,0 +1,11 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-filters {
+    --x-filters-toggle-bg: var(--x-color-surface);
+    --x-filters-option-bg: var(--x-color-surface);
+    --x-filters-option-hover: var(--x-color-text);
+    --x-filters-option-on-color: var(--x-color-on-accent);
+    --x-filters-option-on-bg: var(--x-color-accent);
+  }
+}

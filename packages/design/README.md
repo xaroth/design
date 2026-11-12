@@ -1,6 +1,6 @@
 # @xaroth.nl/design
 
-Design system for [xaroth.nl](https://xaroth.nl) and [eve-online.tools](https://eve-online.tools): Astro and React components over shared CSS, with one theme per site.
+Design system for [xaroth.nl](https://xaroth.nl), [eve-online.tools](https://eve-online.tools) and pbt-web: Astro and React components over shared CSS, with one theme per site.
 
 ```sh
 pnpm add @xaroth.nl/design
@@ -11,7 +11,7 @@ pnpm add @xaroth.nl/design
 Load one theme once, in the site layout. It brings the tokens, reset, base type, spacing utilities, fonts and the theme's look for every part.
 
 ```ts
-import '@xaroth.nl/design/themes/xaroth.css' // or themes/eve-online.css
+import '@xaroth.nl/design/themes/xaroth.css' // or themes/eve-online.css, themes/pbt.css
 ```
 
 Import components from a barrel. Each component brings its own structure CSS; production builds drop what a page does not use.
@@ -40,7 +40,7 @@ Class recipes (for example `buttonClass`) and the theme list are available from 
 ## Themes
 
 - One theme per build. Pages of one Astro build that import different theme files end up sharing both.
-- To show several themes on one page (docs, previews), load `@xaroth.nl/design/themes.css`, put `data-x-theme` (any value) on `<html>` and wrap each section in `data-x-theme="xaroth"` or `data-x-theme="eve-online"`. Sections must be siblings, not nested.
+- To show several themes on one page (docs, previews), load `@xaroth.nl/design/themes.css`, put `data-x-theme` (any value) on `<html>` and wrap each section in `data-x-theme="xaroth"`, `data-x-theme="eve-online"` or `data-x-theme="pbt"`. Sections must be siblings, not nested.
 - CSS sits in the layers `x.reset`, `x.core`, `x.theme` and `x.utility`. Your own unlayered CSS always wins.
 
 ## Spacing utilities

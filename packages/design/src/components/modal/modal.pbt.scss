@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-modal {
+    box-shadow: var(--x-shadow);
+  }
+}
