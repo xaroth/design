@@ -88,13 +88,22 @@
       border-bottom: 1px solid var(--x-description-list-line);
     }
 
-    // A changed value. The row bleeds out by its padding so its text stays aligned with the other rows.
+    // A changed value. The wash reaches past the text on both sides; the row itself, and so its divider, keeps the
+    // list's width.
     &__item--better,
     &__item--worse {
-      padding-inline: var(--x-space-2);
-      margin-inline: calc(-1 * var(--x-space-2));
-      background: var(--x-description-list-change-wash);
-      box-shadow: inset 2px 0 0 var(--x-description-list-change);
+      position: relative;
+      isolation: isolate;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0 calc(-1 * var(--x-space-2));
+        z-index: -1;
+        pointer-events: none;
+        background: var(--x-description-list-change-wash);
+        box-shadow: inset 2px 0 0 var(--x-description-list-change);
+      }
     }
 
     &__item--better {
