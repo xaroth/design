@@ -1,0 +1,20 @@
+---
+import './description-list.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { descriptionListGroupClass, descriptionListGroupTag, type DescriptionListGroupLevel } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'section'>, 'class' | 'title'> & {
+  class?: string
+  title: string
+  level?: DescriptionListGroupLevel
+  titleId?: string
+}
+
+const { title, level, titleId, class: className, slot: _slot, ...rest } = Astro.props
+const Heading = descriptionListGroupTag(level)
+---
+
+<section {...rest} class={descriptionListGroupClass({ className })}>
+  <Heading class="x-description-list-group__title" id={titleId}>{title}</Heading>
+  <slot />
+</section>

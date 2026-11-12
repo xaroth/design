@@ -17,7 +17,7 @@ type Props = Omit<HTMLAttributes<'dl'>, 'class'> &
     items: DescriptionListItem[]
   }
 
-const { items, layout, dividers, class: className, slot: _slot, ...rest } = Astro.props
+const { items, layout, dividers, striped, class: className, slot: _slot, ...rest } = Astro.props
 const slotted = new Map<number, string>()
 for (const i of items.keys()) {
   const name = descriptionListValueSlot(i)
@@ -27,7 +27,7 @@ for (const i of items.keys()) {
 }
 ---
 
-<dl {...rest} class={descriptionListClass({ layout, dividers, className })}>
+<dl {...rest} class={descriptionListClass({ layout, dividers, striped, className })}>
   {
     items.map((item, i) => (
       <div class={descriptionListItemClass(item.change)}>

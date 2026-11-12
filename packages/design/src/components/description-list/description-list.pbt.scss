@@ -7,6 +7,16 @@
     }
   }
 
+  .x-description-list-group__title {
+    padding-bottom: var(--x-space-1);
+    border-bottom: 1px solid var(--x-color-line-strong);
+  }
+
+  // The title's rule already separates it from the first row.
+  .x-description-list-group__title + .x-description-list--dividers {
+    border-top: 0;
+  }
+
   // Full text color on the wash, where muted drops under 7:1 over raised panels.
   .x-description-list__item--better,
   .x-description-list__item--worse {

@@ -7,16 +7,19 @@ $densities: (
     'row-pad': 8px,
     'row-gap': var(--x-space-2),
     'fs': 0.9375rem,
+    'group-gap': var(--x-space-5),
   ),
   'compact': (
     'row-pad': 4px,
     'row-gap': var(--x-space-1),
     'fs': var(--x-fs-small),
+    'group-gap': var(--x-space-4),
   ),
   'dense': (
     'row-pad': 2px,
     'row-gap': 2px,
     'fs': var(--x-fs-label),
+    'group-gap': var(--x-space-3),
   ),
 );
 
