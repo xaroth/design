@@ -1,0 +1,12 @@
+@use '../../styles/theme';
+
+@include theme.parts('eve-online') {
+  .x-workspace {
+    background: var(--x-color-bg);
+
+    &__panel {
+      background: var(--x-color-glass);
+      backdrop-filter: blur(10px);
+    }
+  }
+}

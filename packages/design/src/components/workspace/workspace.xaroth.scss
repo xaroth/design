@@ -1,0 +1,11 @@
+@use '../../styles/theme';
+
+@include theme.parts('xaroth') {
+  .x-workspace {
+    background: var(--x-color-bg);
+
+    &__panel {
+      background: var(--x-color-surface);
+    }
+  }
+}

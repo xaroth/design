@@ -1,0 +1,31 @@
+---
+import Harness from '../layouts/Harness.astro'
+import { DescriptionList, Header, Workspace } from '@xaroth.nl/design/astro'
+
+const frames = [
+  { label: 'Desktop', style: 'height: 560px' },
+  { label: '390 px', style: 'height: 720px; max-width: 390px' },
+]
+const rows = Array.from({ length: 14 }, (_, i) => ({ term: `Value ${i + 1}`, value: String((i + 1) * 12) }))
+---
+
+<Harness title="Workspace">
+  {(theme: string) => (
+    <div style="padding: 0 32px; display: grid; gap: 32px">
+      {frames.map(({ label, style }, i) => (
+        <div>
+          <p style="margin-bottom: 8px">{label}</p>
+          <Workspace panelLabel="Details" style={`${style}; outline: 1px dashed currentColor`}>
+            <Header slot="header" items={[{ label: 'Build', href: '#', current: true }, { label: 'Help', href: '#help' }]} navLabel={`Main ${theme} ${i}`}>
+              <span slot="brand">App</span>
+            </Header>
+            <div style="display: grid; place-items: center; height: 100%; min-height: 1200px">Main region</div>
+            <div slot="panel" style="padding: 16px">
+              <DescriptionList items={rows} />
+            </div>
+          </Workspace>
+        </div>
+      ))}
+    </div>
+  )}
+</Harness>

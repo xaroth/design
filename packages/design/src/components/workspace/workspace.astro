@@ -1,0 +1,28 @@
+---
+import './workspace.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { workspaceClass, workspaceClasses as c, workspacePanelAttrs } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'div'>, 'class'> & {
+  class?: string
+  /** Accessible name of the side panel. */
+  panelLabel: string
+}
+
+const { panelLabel, class: className, slot: _slot, ...rest } = Astro.props
+const { tabIndex, ...panelAttrs } = workspacePanelAttrs(panelLabel)
+---
+
+<div {...rest} class={workspaceClass({ className })}>
+  {
+    Astro.slots.has('header') && (
+      <div class={c.header}>
+        <slot name="header" />
+      </div>
+    )
+  }
+  <div class={c.body}>
+    <main class={c.main}><slot /></main>
+    <aside class={c.panel} {...panelAttrs} tabindex={tabIndex}><slot name="panel" /></aside>
+  </div>
+</div>
