@@ -87,5 +87,67 @@
       padding-block: var(--x-description-list-pad);
       border-bottom: 1px solid var(--x-description-list-line);
     }
+
+    // A changed value. The row bleeds out by its padding so its text stays aligned with the other rows.
+    &__item--better,
+    &__item--worse {
+      padding-inline: var(--x-space-2);
+      margin-inline: calc(-1 * var(--x-space-2));
+      background: var(--x-description-list-change-wash);
+      box-shadow: inset 2px 0 0 var(--x-description-list-change);
+    }
+
+    &__item--better {
+      --x-description-list-change: var(--x-color-success);
+      --x-description-list-change-wash: var(--x-color-success-wash);
+    }
+
+    &__item--worse {
+      --x-description-list-change: var(--x-color-danger);
+      --x-description-list-change-wash: var(--x-color-danger-wash);
+    }
+
+    // The amount follows the value in reading order and wraps under it when the row is narrow.
+    &__item--better &__value,
+    &__item--worse &__value {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 var(--x-space-2);
+      align-items: baseline;
+    }
+
+    // Inline rows show the amount before the value, both pushed right.
+    &--inline &__item--better &__value,
+    &--inline &__item--worse &__value {
+      flex: 1 1 auto;
+      flex-direction: row-reverse;
+    }
+
+    &__change {
+      display: inline-flex;
+      gap: 0.3em;
+      align-items: center;
+      font-size: var(--x-fs-label);
+      white-space: nowrap;
+      color: var(--x-description-list-change);
+    }
+
+    // Direction as well as color, so the change reads without telling red from green.
+    &__arrow {
+      flex: none;
+      width: 0.6em;
+      height: 0.55em;
+      background: currentcolor;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+
+      @media (forced-colors: active) {
+        forced-color-adjust: none;
+        background: CanvasText;
+      }
+    }
+
+    &__item--worse &__arrow {
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
   }
 }

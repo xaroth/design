@@ -2,7 +2,9 @@
 import './description-list.scss'
 import type { HTMLAttributes } from 'astro/types'
 import {
+  descriptionListChangeLabel,
   descriptionListClass,
+  descriptionListItemClass,
   descriptionListValueSlot,
   type DescriptionListItem,
   type DescriptionListOptions,
@@ -28,10 +30,19 @@ for (const i of items.keys()) {
 <dl {...rest} class={descriptionListClass({ layout, dividers, className })}>
   {
     items.map((item, i) => (
-      <div class="x-description-list__item">
+      <div class={descriptionListItemClass(item.change)}>
         <dt class="x-description-list__term">{item.term}</dt>
         <dd class="x-description-list__value">
           {slotted.has(i) ? <Fragment set:html={slotted.get(i)} /> : item.value}
+          {
+            item.change && (
+              <span class="x-description-list__change">
+                <span class="x-description-list__arrow" aria-hidden="true" />
+                {item.change.amount}
+                <span class="x-visually-hidden">{descriptionListChangeLabel(item.change)}</span>
+              </span>
+            )
+          }
         </dd>
       </div>
     ))

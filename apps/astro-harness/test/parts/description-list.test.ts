@@ -31,6 +31,34 @@ describe('DescriptionList', () => {
     })
   }
 
+  const changed = [
+    { term: 'Total DPS', value: '1.84M', change: { amount: '+12.4%', effect: 'better' as const } },
+    { term: 'Mana Cost', value: '14', change: { amount: '-4', effect: 'better' as const, label: 'lower, better' } },
+    { term: 'Chaos Resistance', value: '-12%', change: { amount: '-6%', effect: 'worse' as const } },
+    { term: 'Life', value: '5,412' },
+  ]
+  for (const layout of ['inline', 'stacked', 'columns'] as const) {
+    it(`better and worse changes, ${layout}`, async () => {
+      await expectSameHtml(
+        AstroDescriptionList,
+        { props: { items: changed, layout, dividers: true } },
+        createElement(DescriptionList, { items: changed, layout, dividers: true }),
+      )
+    })
+  }
+
+  it('change next to a slotted value', async () => {
+    const item = { term: 'Source', value: 'Tree', change: { amount: '+1', effect: 'better' as const } }
+    await expectSameHtml(
+      AstroDescriptionList,
+      { props: { items: [item], layout: 'inline' }, slots: { 'value-0': '<a href="#tree">Tree</a>' } },
+      createElement(DescriptionList, {
+        layout: 'inline',
+        items: [{ ...item, value: createElement('a', { href: '#tree' }, 'Tree') }],
+      }),
+    )
+  })
+
   it('empty', async () => {
     await expectSameHtml(AstroDescriptionList, { props: { items: [] } }, createElement(DescriptionList, { items: [] }))
   })
