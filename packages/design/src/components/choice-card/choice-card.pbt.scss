@@ -1,0 +1,24 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-choice-card {
+    --x-choice-card-ink: var(--x-color-accent-strong);
+
+    &:hover:not(:has(.x-choice-card__input:disabled, .x-choice-card__input:checked)) {
+      border-color: var(--x-color-line-strong);
+    }
+
+    &:has(.x-choice-card__input:checked) {
+      background: linear-gradient(var(--x-color-accent-wash), var(--x-color-accent-wash)) var(--x-color-surface);
+      border-color: var(--x-color-accent);
+
+      .x-choice-card__title {
+        color: var(--x-color-accent-strong);
+      }
+    }
+
+    &:has(.x-choice-card__input:disabled) {
+      border-style: dashed;
+    }
+  }
+}

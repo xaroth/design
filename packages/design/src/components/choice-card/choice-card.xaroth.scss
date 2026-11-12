@@ -1,0 +1,52 @@
+@use '../../styles/theme';
+
+@include theme.parts('xaroth') {
+  .x-choice-card {
+    --x-choice-card-ink: var(--x-color-accent-strong);
+
+    &:hover:not(:has(.x-choice-card__input:disabled)) {
+      background-color: var(--x-card-glass-hover);
+      border-color: var(--x-card-edge-hover);
+
+      &::before {
+        right: 0;
+        left: 0;
+      }
+    }
+
+    // The full gold rule of a featured card marks the chosen one.
+    &:has(.x-choice-card__input:checked) {
+      background-color: var(--x-card-glass-hover);
+      border-color: var(--x-color-accent-edge);
+
+      &::before {
+        right: 0;
+        left: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--x-color-bronze),
+          var(--x-color-accent-strong) 50%,
+          var(--x-color-bronze)
+        );
+      }
+
+      .x-choice-card__title {
+        color: var(--x-color-accent-strong);
+      }
+    }
+
+    &:has(.x-choice-card__input:disabled) {
+      box-shadow: none;
+      backdrop-filter: none;
+
+      &::before {
+        display: none;
+      }
+
+      .x-choice-card__title {
+        color: var(--x-color-text-faint);
+      }
+    }
+  }
+}

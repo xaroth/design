@@ -1,0 +1,46 @@
+@use '../../styles/theme';
+@use '../panel/surface';
+
+@include theme.parts('eve-online') {
+  .x-choice-card {
+    --x-choice-card-ink: var(--x-color-accent);
+
+    border-radius: 0;
+
+    &__mark {
+      border-radius: 0;
+      transform: rotate(45deg);
+
+      &::before {
+        border-radius: 0;
+        box-shadow: 0 0 8px var(--x-color-glow);
+      }
+    }
+
+    &:hover:not(:has(.x-choice-card__input:disabled)) {
+      --x-card-fill: linear-gradient(180deg, var(--x-color-surface-3), var(--x-color-surface) 70%);
+    }
+
+    &:has(.x-choice-card__input:checked) {
+      --x-card-edge: linear-gradient(
+        135deg,
+        var(--x-color-accent),
+        var(--x-color-accent-edge) 40%,
+        var(--x-color-line-strong)
+      );
+      --x-card-fill: linear-gradient(180deg, var(--x-color-accent-fill), var(--x-color-surface) 70%);
+    }
+
+    &:has(.x-choice-card__input:focus-visible) {
+      @include surface.focus-ring(var(--x-card-cut), 3px, '::before');
+    }
+
+    &:has(.x-choice-card__input:disabled) {
+      --x-card-fill: var(--x-color-surface);
+
+      .x-choice-card__mark::before {
+        box-shadow: none;
+      }
+    }
+  }
+}
