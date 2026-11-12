@@ -1,0 +1,33 @@
+---
+import Harness from '../layouts/Harness.astro'
+import { ChoiceCard, RadioGroup } from '@xaroth.nl/design/astro'
+
+const options = [
+  { value: 'amarr', title: 'Amarr', text: 'Lasers and armor. Slow, hard to break.' },
+  { value: 'caldari', title: 'Caldari', text: 'Missiles and shields at range.' },
+  { value: 'gallente', title: 'Gallente', text: 'Drones and blasters up close.' },
+  { value: 'minmatar', title: 'Minmatar', text: 'Projectiles and speed.' },
+]
+---
+
+<Harness title="Choice card">
+  {(theme: string) => (
+    <div style="padding: 32px; display: grid; gap: 32px">
+      <RadioGroup id={`${theme}-grid`} legend="Faction" description="Arrow keys move the selection." orientation="horizontal">
+        {options.map(({ value, title, text }, i) => (
+          <ChoiceCard id={`${theme}-grid-${value}`} name={`${theme}-grid`} value={value} title={title} checked={i === 1} disabled={i === 3}>
+            <svg slot="media" viewBox="0 0 160 72" aria-hidden="true">
+              <rect width="160" height="72" fill="currentColor" opacity="0.12" />
+              <circle cx="80" cy="36" r="18" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5" />
+            </svg>
+            {text}
+          </ChoiceCard>
+        ))}
+      </RadioGroup>
+      <RadioGroup id={`${theme}-list`} legend="Server" error="Pick a server." required>
+        <ChoiceCard id={`${theme}-list-tq`} name={`${theme}-list`} value="tq" title="Tranquility">The live server.</ChoiceCard>
+        <ChoiceCard id={`${theme}-list-sisi`} name={`${theme}-list`} value="sisi" title="Singularity" />
+      </RadioGroup>
+    </div>
+  )}
+</Harness>

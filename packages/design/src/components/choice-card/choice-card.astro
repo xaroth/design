@@ -1,0 +1,45 @@
+---
+import '../card/card.scss'
+import './choice-card.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { choiceCardClass, choiceCardIds, choiceCardInputAttrs } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'input'>, 'class' | 'id' | 'type' | 'title'> & {
+  /** The radio's id; the title and text get `${id}-title` and `${id}-text`. */
+  id: string
+  /** Plain-text title; the `title` slot takes markup. */
+  title?: string
+  class?: string
+}
+
+const { id, title, class: className, ...rest } = Astro.props
+const hasText = Astro.slots.has('default')
+const ids = choiceCardIds(id)
+const input = {
+  ...rest,
+  ...choiceCardInputAttrs({ id, hasText, describedBy: rest['aria-describedby'] ?? undefined }),
+  class: 'x-choice-card__input',
+}
+---
+
+<label class={choiceCardClass({ className })}>
+  <input {...input} />
+  {
+    Astro.slots.has('media') && (
+      <span class="x-choice-card__media">
+        <slot name="media" />
+      </span>
+    )
+  }
+  <span class="x-choice-card__head">
+    <span class="x-card__title x-choice-card__title" id={ids.title}><slot name="title">{title}</slot></span>
+    <span class="x-choice-card__mark" aria-hidden="true"></span>
+  </span>
+  {
+    hasText && (
+      <span class="x-card__body x-choice-card__text" id={ids.text}>
+        <slot />
+      </span>
+    )
+  }
+</label>
