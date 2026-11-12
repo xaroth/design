@@ -7,6 +7,16 @@
     }
   }
 
+  .x-description-list-group__title {
+    padding-bottom: var(--x-space-1);
+    border-bottom: 1px solid var(--x-color-line-strong);
+  }
+
+  // The title's rule already separates it from the first row.
+  .x-description-list-group__title + .x-description-list--dividers {
+    border-top: 0;
+  }
+
   // Values are mostly numbers: same size as the term, figures line up across rows.
   .x-description-list__value {
     font-weight: 500;

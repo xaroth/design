@@ -1,6 +1,6 @@
 ---
 import Harness from '../layouts/Harness.astro'
-import { DescriptionList } from '@xaroth.nl/design/astro'
+import { DescriptionList, DescriptionListGroup, DescriptionListGroups } from '@xaroth.nl/design/astro'
 
 const details = [
   { term: 'Published', value: '14 Mar 2026' },
@@ -26,6 +26,11 @@ const changed = [
   { term: 'Hit Damage', value: '48,210' },
   { term: 'Mana Cost', value: '14', change: { amount: '-4', effect: 'better' as const } },
   { term: 'Chaos Resistance', value: '-12%', change: { amount: '-6%', effect: 'worse' as const } },
+]
+const sheet = [
+  { title: 'Offence', items: changed.slice(0, 3) },
+  { title: 'Defences', items: details },
+  { title: 'Resistances', items: [changed[3], ...stats] },
 ]
 const box = 'display: grid; gap: 12px; align-content: start'
 ---
@@ -64,6 +69,20 @@ const box = 'display: grid; gap: 12px; align-content: start'
       <div style={box}>
         <p class="x-label">Better and worse changes</p>
         <DescriptionList items={changed} layout="inline" dividers />
+      </div>
+      <div style={box}>
+        <p class="x-label">Striped</p>
+        <DescriptionList items={details} layout="inline" striped />
+      </div>
+      <div style={`${box}; grid-column: 1 / -1; max-width: 760px`}>
+        <p class="x-label">Groups in columns</p>
+        <DescriptionListGroups layout="columns">
+          {sheet.map((group) => (
+            <DescriptionListGroup title={group.title}>
+              <DescriptionList items={group.items} layout="inline" dividers />
+            </DescriptionListGroup>
+          ))}
+        </DescriptionListGroups>
       </div>
       <div style={box}>
         <p class="x-label">Comfortable area</p>

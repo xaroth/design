@@ -88,6 +88,17 @@
       border-bottom: 1px solid var(--x-description-list-line);
     }
 
+    // Rows bleed out by their padding so their text stays aligned with whatever sits next to the list.
+    &--striped &__item {
+      padding-inline: var(--x-space-2);
+      margin-inline: calc(-1 * var(--x-space-2));
+    }
+
+    // Kept at one class of specificity so a changed row's wash wins.
+    &--striped :where(.x-description-list__item:nth-child(even)) {
+      background: var(--x-description-list-stripe, color-mix(in srgb, var(--x-color-text) 5%, transparent));
+    }
+
     // A changed value. The row bleeds out by its padding so its text stays aligned with the other rows.
     &__item--better,
     &__item--worse {
@@ -148,6 +159,43 @@
 
     &__item--worse &__arrow {
       clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+  }
+
+  // Groups flow as blocks, so the gap above a group that starts a column is dropped.
+  .x-description-list-groups {
+    --x-description-list-groups-gap: var(--x-density-group-gap, var(--x-space-5));
+    --x-description-list-groups-width: 14rem;
+
+    min-width: 0;
+
+    > * + * {
+      margin-block-start: var(--x-description-list-groups-gap);
+    }
+
+    &--columns {
+      column-gap: var(--x-space-6);
+      column-rule: 1px solid var(--x-color-line);
+      column-width: var(--x-description-list-groups-width);
+
+      > * {
+        break-inside: avoid;
+      }
+    }
+  }
+
+  .x-description-list-group {
+    min-width: 0;
+
+    &__title {
+      margin: 0 0 var(--x-space-2);
+      font-family: var(--x-font-ui);
+      font-size: var(--x-fs-label);
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: var(--x-track-label);
+      text-transform: uppercase;
+      color: var(--x-color-text-faint);
     }
   }
 }

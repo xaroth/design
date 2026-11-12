@@ -1,0 +1,14 @@
+---
+import './description-list.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { descriptionListGroupsClass, type DescriptionListGroupsOptions } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'div'>, 'class'> &
+  Omit<DescriptionListGroupsOptions, 'className'> & {
+    class?: string
+  }
+
+const { layout, class: className, slot: _slot, ...rest } = Astro.props
+---
+
+<div {...rest} class={descriptionListGroupsClass({ layout, className })}><slot /></div>

@@ -35,7 +35,7 @@ To show several themes on one page (docs, previews), load `@xaroth.nl/design/the
 - Tokens: `--x-*`. Core owns layout tokens (space, type scale, control sizes); themes own color, font and shape tokens.
 - Layers: `x.reset`, `x.core`, `x.theme`, `x.utility`. Site CSS outside layers always wins.
 - Spacing utilities: `x-{p,m}{,x,y,t,r,b,l}-{size}` and `x-gap{,-x,-y}-{size}`, sizes `none 2xs xs sm md lg xl 2xl 3xl 4xl` (margins also `section`, `auto`). They ship with the theme file.
-- Density utilities: `x-density-comfortable`, `x-density-compact`, `x-density-dense` on any container set the row spacing and text size of value lists inside it. Without one, parts keep their theme's size.
+- Density utilities: `x-density-comfortable`, `x-density-compact`, `x-density-dense` on any container set the row spacing, text size and group gaps of value lists inside it. Without one, parts keep their theme's size.
 - Each part lives in `src/components/<part>/`; see CONTRIBUTING.md. Class names come from the folder's `index.ts`, shared by the Astro and React components.
 - Browsers: Baseline widely available.
 

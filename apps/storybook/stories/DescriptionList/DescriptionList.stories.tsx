@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { DescriptionList } from '@xaroth.nl/design/react'
-import { matrix, Row, Rows } from './shared.tsx'
+import { matrix, Row, Rows } from '../shared.tsx'
 
 const meta = {
-  title: 'DescriptionList',
+  title: 'DescriptionList/DescriptionList',
   component: DescriptionList,
   args: {
     layout: 'inline',
     dividers: true,
+    striped: false,
     items: [
       { term: 'Published', value: <time dateTime="2026-03-14">14 Mar 2026</time> },
       { term: 'Read time', value: '6 min' },
@@ -18,6 +19,7 @@ const meta = {
   argTypes: {
     layout: { control: 'inline-radio', options: ['stacked', 'inline', 'columns'] },
     dividers: { control: 'boolean' },
+    striped: { control: 'boolean' },
     items: { control: false },
   },
 } satisfies Meta<typeof DescriptionList>
@@ -36,6 +38,11 @@ export const Default: StoryObj<typeof meta> = {
 }
 
 const layouts = ['stacked', 'inline', 'columns'] as const
+const lines = [
+  ['dividers', true, false],
+  ['no dividers', false, false],
+  ['striped', false, true],
+] as const
 
 export const Variants: StoryObj<typeof meta> = {
   parameters: matrix,
@@ -45,15 +52,16 @@ export const Variants: StoryObj<typeof meta> = {
       style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(20rem, 1fr))' }}
     >
       {layouts.flatMap((layout) =>
-        [true, false].map((dividers) => (
+        lines.map(([label, dividers, striped]) => (
           <Row
-            key={`${layout}-${dividers}`}
-            label={`${layout}, ${dividers ? 'dividers' : 'no dividers'}`}
+            key={`${layout}-${label}`}
+            label={`${layout}, ${label}`}
             stack
           >
             <DescriptionList
               layout={layout}
               dividers={dividers}
+              striped={striped}
               items={args.items}
             />
           </Row>
