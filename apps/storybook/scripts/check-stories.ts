@@ -34,17 +34,25 @@ await new Promise<void>((resolve) => server.listen(0, resolve))
 const { port } = server.address() as { port: number }
 
 const index = JSON.parse(await readFile(join(root, 'index.json'), 'utf8')) as {
-  entries: Record<string, { id: string; type: string; title: string; name: string }>
+  entries: Record<string, { id: string; type: string; title: string; name: string; tags?: string[] }>
 }
 const stories = Object.values(index.entries).filter((e) => e.type === 'story')
+const viewports = { desktop: { width: 1280, height: 800 }, phone: { width: 390, height: 844 } }
 
 const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM || undefined })
-const context = await browser.newContext({ viewport: { width: 1280, height: 800 } })
-await context.addInitScript({ content: axeSource })
+const contexts = Object.fromEntries(
+  await Promise.all(
+    Object.entries(viewports).map(async ([name, viewport]) => {
+      const context = await browser.newContext({ viewport })
+      await context.addInitScript({ content: axeSource })
+      return [name, context] as const
+    }),
+  ),
+)
 const failures: string[] = []
 
-const check = async (theme: string, story: (typeof stories)[number]) => {
-  const page = await context.newPage()
+const check = async (theme: string, story: (typeof stories)[number], viewport: keyof typeof viewports) => {
+  const page = await contexts[viewport].newPage()
   const errors: string[] = []
   page.on('pageerror', (e) => errors.push(e.message))
   // a11y.manual stops the addon's own axe run, which would race this one ("Axe is already running").
@@ -77,13 +85,19 @@ const check = async (theme: string, story: (typeof stories)[number]) => {
     )
   })
   for (const message of [...errors, ...violations]) {
-    failures.push(`${theme} ${story.title} / ${story.name}: ${message}`)
+    failures.push(`${theme} ${viewport} ${story.title} / ${story.name}: ${message}`)
   }
   await page.close()
 }
 
 // A few pages at a time: the check is dominated by page load and font waits, not CPU.
-const jobs = themeIds.flatMap((theme) => stories.map((story) => () => check(theme, story)))
+// Stories tagged `phone` are also checked at phone width.
+const jobs = themeIds.flatMap((theme) =>
+  stories.flatMap((story) => [
+    () => check(theme, story, 'desktop'),
+    ...(story.tags?.includes('phone') ? [() => check(theme, story, 'phone')] : []),
+  ]),
+)
 const workers = Array.from({ length: Math.min(6, jobs.length) }, async () => {
   for (let job = jobs.shift(); job; job = jobs.shift()) {
     await job()
@@ -99,4 +113,6 @@ if (failures.length) {
   console.error(`\n${failures.length} problem(s) in ${stories.length} stories x ${themeIds.length} themes.`)
   process.exit(1)
 }
-console.log(`${stories.length} stories x ${themeIds.length} themes: rendered, no axe violations.`)
+console.log(
+  `${stories.length} stories x ${themeIds.length} themes: rendered, no axe violations (phone-tagged also at 390px).`,
+)

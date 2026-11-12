@@ -1,6 +1,7 @@
 import type { Decorator, Preview } from '@storybook/react-vite'
 import { themeIds, themes } from '@xaroth.nl/design/parts'
 import '@xaroth.nl/design/themes.css'
+import { MINIMAL_VIEWPORTS } from 'storybook/viewport'
 import './preview.css'
 
 // Unknown values (for example a remembered theme that no longer exists) fall back to the first theme.
@@ -27,6 +28,12 @@ const preview: Preview = {
   parameters: {
     backgrounds: { disable: true },
     a11y: { test: 'error' },
+    viewport: {
+      options: {
+        phone390: { name: 'Phone 390', styles: { width: '390px', height: '844px' }, type: 'mobile' },
+        ...MINIMAL_VIEWPORTS,
+      },
+    },
   },
 }
 
