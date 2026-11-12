@@ -17,6 +17,12 @@
     border-top: 0;
   }
 
+  // Full text color on the wash, where muted drops under 7:1 over raised panels.
+  .x-description-list__item--better,
+  .x-description-list__item--worse {
+    --x-description-list-term-color: var(--x-color-text);
+  }
+
   // Values are mostly numbers: same size as the term, figures line up across rows.
   .x-description-list__value {
     font-weight: 500;
