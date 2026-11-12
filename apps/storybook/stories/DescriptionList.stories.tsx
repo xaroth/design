@@ -81,6 +81,32 @@ export const States: StoryObj<typeof meta> = {
         />
       </Row>
       <Row
+        label="Better and worse changes"
+        stack
+      >
+        <DescriptionList
+          layout="inline"
+          dividers
+          items={[
+            { term: 'Total DPS', value: '1.84M', change: { amount: '+12.4%', effect: 'better' } },
+            { term: 'Hit Damage', value: '48,210' },
+            { term: 'Mana Cost', value: '14', change: { amount: '-4', effect: 'better' } },
+            { term: 'Chaos Resistance', value: '-12%', change: { amount: '-6%', effect: 'worse' } },
+          ]}
+        />
+      </Row>
+      <Row
+        label="Changes, stacked"
+        stack
+      >
+        <DescriptionList
+          items={[
+            { term: 'Total DPS', value: '1.84M', change: { amount: '+12.4%', effect: 'better' } },
+            { term: 'Chaos Resistance', value: '-12%', change: { amount: '-6%', effect: 'worse' } },
+          ]}
+        />
+      </Row>
+      <Row
         label="Single item"
         stack
       >

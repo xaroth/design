@@ -21,6 +21,12 @@ const stats = [
   { term: 'Region', value: 'The Forge' },
   { term: 'Security', value: '0.9' },
 ]
+const changed = [
+  { term: 'Total DPS', value: '1.84M', change: { amount: '+12.4%', effect: 'better' as const } },
+  { term: 'Hit Damage', value: '48,210' },
+  { term: 'Mana Cost', value: '14', change: { amount: '-4', effect: 'better' as const } },
+  { term: 'Chaos Resistance', value: '-12%', change: { amount: '-6%', effect: 'worse' as const } },
+]
 const box = 'display: grid; gap: 12px; align-content: start'
 ---
 
@@ -54,6 +60,10 @@ const box = 'display: grid; gap: 12px; align-content: start'
       <div style={box}>
         <p class="x-label">Stacked, dividers</p>
         <DescriptionList items={stats} dividers />
+      </div>
+      <div style={box}>
+        <p class="x-label">Better and worse changes</p>
+        <DescriptionList items={changed} layout="inline" dividers />
       </div>
       <div style={box}>
         <p class="x-label">Comfortable area</p>

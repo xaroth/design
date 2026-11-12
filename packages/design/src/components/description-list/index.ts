@@ -4,7 +4,18 @@ import { bem } from '../../bem.ts'
 // next to it; stacks under 640px.
 export type DescriptionListLayout = 'stacked' | 'inline' | 'columns'
 
-export type DescriptionListItem<T = string> = { term: string; value: T }
+// Whether a change helps or hurts, which is not the same as its sign: less mana cost is better.
+export type DescriptionListEffect = 'better' | 'worse'
+
+export type DescriptionListChange = {
+  /** The change as shown, for example "+12.4%" or "-4". */
+  amount: string
+  effect: DescriptionListEffect
+  /** Read after the amount by screen readers; defaults to the effect ("better", "worse"). */
+  label?: string
+}
+
+export type DescriptionListItem<T = string> = { term: string; value: T; change?: DescriptionListChange }
 
 export type DescriptionListOptions = {
   layout?: DescriptionListLayout
@@ -22,3 +33,9 @@ export const descriptionListClass = ({
 
 // Astro: markup for one value goes in a named slot, overriding the item value.
 export const descriptionListValueSlot = (index: number): string => `value-${index}`
+
+export const descriptionListItemClass = (change?: DescriptionListChange): string =>
+  descriptionList.el('item', { effect: change?.effect })
+
+// Leading space so the hidden word does not run into the amount.
+export const descriptionListChangeLabel = (change: DescriptionListChange): string => ` ${change.label ?? change.effect}`
