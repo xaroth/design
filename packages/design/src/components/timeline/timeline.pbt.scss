@@ -1,0 +1,17 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-timeline {
+    --x-timeline-spine: var(--x-color-line-strong);
+  }
+
+  .x-timeline__date {
+    font-weight: 500;
+    color: var(--x-color-text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .x-timeline__title {
+    font-weight: 600;
+  }
+}

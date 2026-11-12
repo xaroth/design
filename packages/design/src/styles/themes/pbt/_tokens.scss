@@ -1,0 +1,60 @@
+@use '../../theme';
+
+@include theme.scope('pbt') {
+  --x-font-display: 'Onest Variable', 'Onest', system-ui, sans-serif;
+  --x-font-heading: var(--x-font-display);
+  --x-font-body: var(--x-font-display);
+  --x-font-ui: var(--x-font-display);
+  --x-font-mono: 'Red Hat Mono Variable', 'Red Hat Mono', ui-monospace, monospace;
+
+  // Dense panels: body text one step smaller than the shared default.
+  --x-fs-body: 0.9375rem;
+  --x-track-display: 0;
+  --x-track-heading: 0;
+  --x-track-label: 0.12em;
+  --x-track-caps: 0.12em;
+
+  --x-color-bg: #0c0c0d;
+  --x-color-bg-sunk: #09090a;
+  --x-color-surface: #141415;
+  --x-color-surface-2: #1b1b1d;
+  --x-color-surface-3: #232326;
+  --x-color-glass: var(--x-color-surface);
+  --x-color-glass-edge: #2b2b2e;
+  --x-color-line: #252528;
+  --x-color-line-strong: #38383c;
+  --x-color-field-edge: #6a6a70;
+  --x-color-rule: #4a4a50;
+
+  --x-color-text: #e8e6e3;
+  --x-color-text-muted: #b8b5af;
+  --x-color-text-faint: #b3b0ab;
+
+  --x-color-accent: #c4ae86;
+  --x-color-accent-strong: #dcc9a4;
+  --x-color-accent-edge: #5e5442;
+  --x-color-accent-wash: rgb(196 174 134 / 8%);
+  --x-color-on-accent: #121110;
+  --x-color-overlay: rgb(9 9 10 / 78%);
+  --x-color-focus: #dcc9a4;
+
+  --x-color-info: #9fbfe0;
+  --x-color-on-info: #121110;
+  --x-color-info-wash: rgb(159 191 224 / 10%);
+  --x-color-success: #8fcf8f;
+  --x-color-on-success: #121110;
+  --x-color-success-wash: rgb(143 207 143 / 10%);
+  --x-color-warning: #e0b25c;
+  --x-color-on-warning: #121110;
+  --x-color-warning-wash: rgb(224 178 92 / 10%);
+  --x-color-danger: #f5a69d;
+  --x-color-on-danger: #121110;
+  --x-color-danger-wash: rgb(245 166 157 / 10%);
+
+  --x-radius: 0px;
+  --x-cut-sm: 0px;
+  --x-cut-md: 0px;
+  --x-cut-lg: 0px;
+  --x-blur: none;
+  --x-shadow: 0 16px 32px -16px rgb(0 0 0 / 70%);
+}

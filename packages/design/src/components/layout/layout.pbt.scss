@@ -1,0 +1,28 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  // A short accent mark under the head, over a full-width hairline.
+  .x-section-head {
+    position: relative;
+    padding-bottom: var(--x-space-3);
+    border-bottom: 1px solid var(--x-color-line-strong);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 2rem;
+      height: 1px;
+      background: var(--x-color-accent);
+    }
+
+    &__titles {
+      gap: var(--x-space-1);
+    }
+
+    &__eyebrow {
+      color: var(--x-color-accent);
+    }
+  }
+}

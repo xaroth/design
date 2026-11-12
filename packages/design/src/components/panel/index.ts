@@ -8,7 +8,7 @@ export type PanelElement = 'div' | 'section' | 'article' | 'aside' | 'li' | 'for
 
 export type PanelOptions = {
   variant?: PanelVariant
-  /** Corner ornament: brackets on eve-online, a gold top line on xaroth. */
+  /** Corner ornament: brackets on eve-online, a gold top line on xaroth, a short accent mark on pbt. */
   marks?: boolean
   padding?: PanelPadding
   className?: string

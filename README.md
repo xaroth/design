@@ -1,14 +1,14 @@
 # design
 
-Shared design system for [xaroth.nl](https://xaroth.nl) and [eve-online.tools](https://eve-online.tools), published as `@xaroth.nl/design`.
+Shared design system for [xaroth.nl](https://xaroth.nl), [eve-online.tools](https://eve-online.tools) and pbt-web, published as `@xaroth.nl/design`.
 
-One core (layout, sizes, part structure) and two themes (color, fonts, shape, ornament). The same parts render identical HTML from Astro and React.
+One core (layout, sizes, part structure) and three themes (color, fonts, shape, ornament). The same parts render identical HTML from Astro and React.
 
 ## Use
 
 ```ts
 // Once per site, in the layout.
-import '@xaroth.nl/design/themes/xaroth.css' // or themes/eve-online.css
+import '@xaroth.nl/design/themes/xaroth.css' // or themes/eve-online.css, themes/pbt.css
 ```
 
 ```astro
@@ -27,7 +27,7 @@ Components bring their own structure CSS; the theme file brings tokens, base sty
 
 A site loads one theme and needs nothing else. Use one theme per build: two pages of one Astro build that import different theme files end up sharing both, because Vite bundles shared CSS across pages.
 
-To show several themes on one page (docs, previews), load `@xaroth.nl/design/themes.css`, set `data-x-theme` on `<html>` (any value) and wrap each section in `data-x-theme="xaroth"` or `data-x-theme="eve-online"`. Wrapped sections must be siblings: a theme nested inside another theme is not supported.
+To show several themes on one page (docs, previews), load `@xaroth.nl/design/themes.css`, set `data-x-theme` on `<html>` (any value) and wrap each section in `data-x-theme="xaroth"`, `data-x-theme="eve-online"` or `data-x-theme="pbt"`. Wrapped sections must be siblings: a theme nested inside another theme is not supported.
 
 ## Conventions
 
@@ -43,7 +43,7 @@ To show several themes on one page (docs, previews), load `@xaroth.nl/design/the
 | Path | What |
 | --- | --- |
 | `packages/design` | The published package |
-| `apps/storybook` | Storybook (React), both themes, axe checks |
+| `apps/storybook` | Storybook (React), every theme, axe checks |
 | `apps/astro-harness` | Astro app; runs the same-HTML test for every part |
 
 ```sh

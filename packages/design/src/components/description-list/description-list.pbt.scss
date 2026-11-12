@@ -1,0 +1,15 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-description-list {
+    a:not([class]) {
+      color: var(--x-color-accent-strong);
+    }
+  }
+
+  // Values are mostly numbers: same size as the term, figures line up across rows.
+  .x-description-list__value {
+    font-weight: 500;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+}

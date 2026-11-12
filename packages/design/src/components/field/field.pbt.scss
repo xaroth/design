@@ -1,0 +1,38 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-field,
+  .x-choice-group,
+  .x-input,
+  .x-input-wrap,
+  .x-textarea,
+  .x-select,
+  .x-checkbox,
+  .x-radio,
+  .x-switch {
+    --x-field-bg: var(--x-color-bg-sunk);
+    --x-field-bg-focus: var(--x-color-bg-sunk);
+    --x-field-bg-disabled: var(--x-color-surface);
+    --x-field-edge-hover: var(--x-color-text-faint);
+    --x-field-help-fs: var(--x-fs-small);
+    --x-input-icon: var(--x-color-text-muted);
+    --x-check-on-bg: color-mix(in srgb, var(--x-color-accent) 16%, transparent);
+    --x-check-ink: var(--x-color-accent-strong);
+  }
+
+  .x-input,
+  .x-textarea,
+  .x-select {
+    &:disabled {
+      border-style: dashed;
+    }
+  }
+
+  .x-checkbox__input,
+  .x-radio__input,
+  .x-switch__input {
+    &:disabled {
+      border-style: dashed;
+    }
+  }
+}

@@ -212,6 +212,9 @@ importers:
       '@fontsource-variable/azeret-mono':
         specifier: ^5.3.0
         version: 5.3.0
+      '@fontsource-variable/onest':
+        specifier: ^5.3.1
+        version: 5.3.1
       '@fontsource-variable/red-hat-mono':
         specifier: ^5.3.0
         version: 5.3.0
@@ -834,6 +837,9 @@ packages:
 
   '@fontsource-variable/azeret-mono@5.3.0':
     resolution: {integrity: sha512-nX76TwGHW53SoMMJoqb415uFqEQ3qnthL/bEeOOI2DjC7MntyIUVItQ45sVLe5+wG4gT0H5B7auAMa77p8Qc3Q==}
+
+  '@fontsource-variable/onest@5.3.1':
+    resolution: {integrity: sha512-xaaw6G4HDB2/RczsWLD/2bnib4ykmQlTlBUN3GOEOiyErilZukQWVJG95h9zwAy0i8KY+QzDa+COPfqhI72Acw==}
 
   '@fontsource-variable/red-hat-mono@5.3.0':
     resolution: {integrity: sha512-/mEvTCcruJY64xRgx1gsmsYuGR7MtOduOsuyeHVJ07p+2gGvCqROauIwaTCcVHL4eBGi+Lns4EUIjrPZLCn5gQ==}
@@ -4563,6 +4569,8 @@ snapshots:
   '@fontsource-variable/alegreya@5.3.0': {}
 
   '@fontsource-variable/azeret-mono@5.3.0': {}
+
+  '@fontsource-variable/onest@5.3.1': {}
 
   '@fontsource-variable/red-hat-mono@5.3.0': {}
 

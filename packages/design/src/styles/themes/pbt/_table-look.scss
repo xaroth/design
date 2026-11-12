@@ -1,0 +1,27 @@
+// Shared by .x-table and raw tables in .x-prose. No CSS of its own.
+@mixin frame {
+  background: var(--x-color-surface);
+  border: 1px solid var(--x-color-glass-edge);
+}
+
+@mixin table {
+  --x-table-hover: var(--x-color-accent-wash);
+  --x-table-stripe: color-mix(in srgb, var(--x-color-text) 4%, transparent);
+
+  font-variant-numeric: lining-nums tabular-nums;
+
+  // Opaque, so a sticky header hides the rows under it. The line is a shadow because collapsed borders do not stick.
+  :where(thead th) {
+    font-weight: 600;
+    letter-spacing: var(--x-track-label);
+    text-transform: uppercase;
+    color: var(--x-color-text-faint);
+    background: var(--x-color-surface-2);
+    box-shadow: inset 0 -1px 0 var(--x-color-line-strong);
+  }
+
+  :where(tbody th) {
+    font-weight: 500;
+    color: var(--x-color-text);
+  }
+}

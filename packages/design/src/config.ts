@@ -2,6 +2,7 @@
 export const themes = [
   { id: 'xaroth', label: 'xaroth.nl' },
   { id: 'eve-online', label: 'eve-online.tools' },
+  { id: 'pbt', label: 'pbt-web' },
 ] as const
 
 export type Theme = (typeof themes)[number]['id']

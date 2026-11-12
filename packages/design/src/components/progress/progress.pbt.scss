@@ -1,0 +1,8 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-progress {
+    --x-progress-md: 6px;
+    --x-progress-sm: 3px;
+  }
+}

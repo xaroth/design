@@ -1,0 +1,68 @@
+@use '../../styles/theme';
+@use '../../styles/themes/pbt/table-look';
+
+@include theme.parts('pbt') {
+  .x-prose {
+    // Plain links only: parts rendered as <a> (x-button, x-tag) keep their own colors.
+    :where(a:not([class])) {
+      color: var(--x-color-accent-strong);
+      text-decoration-color: var(--x-color-accent-edge);
+
+      &:hover {
+        text-decoration-color: var(--x-color-accent);
+      }
+    }
+
+    :where(li)::marker {
+      color: var(--x-color-text-faint);
+    }
+
+    :where(blockquote) {
+      padding-left: var(--x-space-4);
+      color: var(--x-color-text-muted);
+      border-left: 2px solid var(--x-color-line-strong);
+    }
+
+    :where(:not(pre)) > :where(code) {
+      color: var(--x-color-text);
+      background: var(--x-color-surface-2);
+    }
+
+    :where(figure:not(.x-code)) > :is(img, svg, video, picture) {
+      padding: var(--x-space-4);
+      background: var(--x-color-bg-sunk);
+    }
+
+    :where(table:not(.x-table)) {
+      @include table-look.frame;
+      @include table-look.table;
+    }
+  }
+
+  .x-code {
+    --x-code-kw: var(--x-color-accent-strong);
+    --x-code-str: var(--x-color-success);
+    --x-code-num: var(--x-color-warning);
+    --x-code-fn: var(--x-color-info);
+    --x-code-com: var(--x-color-text-faint);
+    --x-code-bg: var(--x-color-bg-sunk);
+
+    color: var(--x-color-text);
+    background: var(--x-code-bg);
+    border: 1px solid var(--x-color-line-strong);
+
+    &__bar {
+      color: var(--x-color-text-muted);
+      border-bottom: 1px solid var(--x-color-line-strong);
+    }
+
+    &__pre {
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    &__line::before {
+      color: var(--x-color-text-faint);
+    }
+  }
+}

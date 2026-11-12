@@ -1,0 +1,38 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-panel {
+    background: var(--x-color-surface);
+    border: 1px solid var(--x-color-glass-edge);
+
+    &--raised {
+      background: var(--x-color-surface-2);
+      border-color: var(--x-color-line-strong);
+      box-shadow: var(--x-shadow);
+    }
+
+    &--accent {
+      background: var(--x-color-surface-2);
+      border-color: var(--x-color-line-strong);
+      border-top-color: var(--x-color-accent);
+    }
+
+    &--callout {
+      background: var(--x-color-surface-2);
+      border-color: var(--x-color-accent-edge);
+      border-left: 2px solid var(--x-color-accent);
+    }
+
+    // A short accent mark on the top edge, matching the section head underline.
+    &--marks::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 2rem;
+      height: 1px;
+      pointer-events: none;
+      background: var(--x-color-accent);
+    }
+  }
+}

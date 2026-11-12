@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-tooltip {
+    --x-tooltip-edge: var(--x-color-line-strong);
+  }
+}

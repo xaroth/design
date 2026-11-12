@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-icon {
+    --x-icon-stroke: 1.75;
+  }
+}

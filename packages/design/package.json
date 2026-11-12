@@ -1,7 +1,7 @@
 {
   "name": "@xaroth.nl/design",
   "version": "0.4.0",
-  "description": "Shared design system for xaroth.nl and eve-online.tools: CSS core, themes, Astro and React parts.",
+  "description": "Shared design system for xaroth.nl, eve-online.tools and pbt-web: CSS core, themes, Astro and React parts.",
   "license": "MIT",
   "author": "Xaroth Brook <xaroth+github@xaroth.nl>",
   "keywords": [
@@ -62,6 +62,7 @@
   "dependencies": {
     "@fontsource-variable/alegreya": "^5.3.0",
     "@fontsource-variable/azeret-mono": "^5.3.0",
+    "@fontsource-variable/onest": "^5.3.1",
     "@fontsource-variable/red-hat-mono": "^5.3.0",
     "@fontsource-variable/saira": "^5.3.0",
     "@fontsource-variable/sofia-sans": "^5.3.0",

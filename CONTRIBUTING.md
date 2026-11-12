@@ -3,13 +3,13 @@
 Everything for a part lives in one folder, `packages/design/src/components/<part>/`. Related components share a folder
 (for example `field` holds input, select, checkbox and friends).
 
-| File                                           | Job                                                                                                                                                        |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `index.ts`                                     | Class recipe (`cardClass(...)`), state helpers and prop types. The only place class names and state attributes are decided.                                |
-| `<part>.scss`                                  | Structure: layout, spacing, sizes, states. Tokens only, no theme look. Wrapped in `@layer x.core`.                                                         |
-| `<part>.xaroth.scss`, `<part>.eve-online.scss` | Theme look: shape, ornament, theme-specific color. Everything inside `@include theme.parts('<theme>') { ... }`. Built into that theme's single stylesheet. |
-| `<name>.astro`                                 | One file per Astro component, kebab-case (`section-head.astro`). Imports `./<part>.scss` and the recipe.                                                   |
-| `<part>.tsx`                                   | The React components of the folder. Imports `./<part>.scss` and the recipe.                                                                                |
+| File                  | Job                                                                                                                                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `index.ts`            | Class recipe (`cardClass(...)`), state helpers and prop types. The only place class names and state attributes are decided.                                                                      |
+| `<part>.scss`         | Structure: layout, spacing, sizes, states. Tokens only, no theme look. Wrapped in `@layer x.core`.                                                                                               |
+| `<part>.<theme>.scss` | One per theme (`<part>.xaroth.scss`). Theme look: shape, ornament, theme-specific color. Everything inside `@include theme.parts('<theme>') { ... }`. Built into that theme's single stylesheet. |
+| `<name>.astro`        | One file per Astro component, kebab-case (`section-head.astro`). Imports `./<part>.scss` and the recipe.                                                                                         |
+| `<part>.tsx`          | The React components of the folder. Imports `./<part>.scss` and the recipe.                                                                                                                      |
 
 Outside the package:
 

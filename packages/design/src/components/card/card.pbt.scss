@@ -1,0 +1,39 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-card {
+    --x-card-gap: var(--x-space-3);
+
+    background: var(--x-color-surface);
+    border: 1px solid var(--x-color-glass-edge);
+    transition: border-color var(--x-duration) var(--x-ease);
+
+    &--link:hover {
+      border-color: var(--x-color-line-strong);
+
+      .x-card__title {
+        color: var(--x-color-accent-strong);
+      }
+    }
+
+    &--featured {
+      border-top-color: var(--x-color-accent);
+    }
+
+    &__index {
+      font-size: var(--x-fs-label);
+      font-weight: 600;
+      color: var(--x-color-text-faint);
+      font-variant-numeric: tabular-nums;
+    }
+
+    &__title {
+      font-weight: 600;
+      transition: color var(--x-duration) var(--x-ease);
+    }
+
+    &__foot-end {
+      color: var(--x-color-accent-strong);
+    }
+  }
+}

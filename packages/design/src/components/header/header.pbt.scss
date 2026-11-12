@@ -1,0 +1,55 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-header {
+    border-bottom: 1px solid var(--x-color-line);
+  }
+
+  .x-header__brand {
+    font-weight: 600;
+    color: var(--x-color-text);
+
+    &:hover {
+      color: var(--x-color-text);
+    }
+  }
+
+  .x-header__link {
+    padding: var(--x-space-4) 0;
+    font-size: var(--x-fs-small);
+    font-weight: 500;
+    line-height: 1.3;
+    text-decoration: none;
+    color: var(--x-color-text-muted);
+    transition: color var(--x-duration) var(--x-ease);
+
+    &:hover {
+      color: var(--x-color-text);
+    }
+
+    &[aria-current='page'] {
+      color: var(--x-color-text);
+      box-shadow: inset 0 -2px 0 var(--x-color-accent);
+    }
+  }
+
+  .x-header__nav .x-header__list {
+    gap: 0 var(--x-space-5);
+  }
+
+  .x-header--inline {
+    .x-header__nav .x-header__link {
+      min-height: var(--x-header-height);
+    }
+
+    .x-header__panel {
+      background: var(--x-color-surface-2);
+      border: 1px solid var(--x-color-line-strong);
+      box-shadow: var(--x-shadow);
+    }
+  }
+
+  .x-header__panel .x-header__link {
+    padding: var(--x-space-3) var(--x-space-4);
+  }
+}

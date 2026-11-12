@@ -1,0 +1,16 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-breadcrumbs__item {
+    font-size: var(--x-fs-small);
+    color: var(--x-color-text-muted);
+  }
+
+  .x-breadcrumbs__link:hover {
+    color: var(--x-color-text);
+  }
+
+  .x-breadcrumbs__current {
+    color: var(--x-color-text);
+  }
+}

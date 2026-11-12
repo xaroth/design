@@ -1,0 +1,13 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-page-head {
+    &__title {
+      font-weight: 600;
+    }
+
+    &__eyebrow {
+      color: var(--x-color-accent);
+    }
+  }
+}

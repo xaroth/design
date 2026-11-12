@@ -1,0 +1,11 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-avatar {
+    --x-avatar-weight: 600;
+
+    color: var(--x-color-text);
+    background: var(--x-color-surface-3);
+    border: 1px solid var(--x-color-line-strong);
+  }
+}

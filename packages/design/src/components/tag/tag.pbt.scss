@@ -1,0 +1,19 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-tag {
+    background: var(--x-color-surface);
+
+    &:where(a):hover {
+      color: var(--x-color-text);
+      border-color: var(--x-color-text-faint);
+    }
+
+    &--active,
+    &--active:where(a):hover {
+      color: var(--x-color-on-accent);
+      background: var(--x-color-accent);
+      border-color: var(--x-color-accent);
+    }
+  }
+}

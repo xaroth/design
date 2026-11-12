@@ -1,0 +1,21 @@
+@use '../../styles/theme';
+@use '../../styles/themes/pbt/table-look' as look;
+
+@include theme.parts('pbt') {
+  .x-table-wrap {
+    @include look.frame;
+
+    --x-table-cover: var(--x-color-surface);
+    --x-table-edge: var(--x-color-line-strong);
+
+    background: var(--x-table-hint), var(--x-color-surface);
+  }
+
+  .x-table {
+    @include look.table;
+
+    &__cell--num {
+      font-weight: 500;
+    }
+  }
+}

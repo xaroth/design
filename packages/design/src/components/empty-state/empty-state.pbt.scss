@@ -1,0 +1,11 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-empty-state {
+    border: 1px dashed var(--x-color-line-strong);
+  }
+
+  .x-empty-state__icon {
+    color: var(--x-color-text-faint);
+  }
+}
