@@ -70,6 +70,30 @@
       min-width: 0;
     }
 
+    // Sized for the top of a panel: an h3-sized title, and a gap that suits section headings right below.
+    &--compact {
+      gap: var(--x-space-3);
+      margin-bottom: var(--x-space-4);
+
+      .x-page-head__body {
+        gap: var(--x-space-3);
+      }
+
+      .x-page-head__titles {
+        gap: var(--x-space-1);
+      }
+
+      .x-page-head__title {
+        font-size: var(--x-fs-h3);
+        line-height: 1.25;
+      }
+
+      .x-page-head__lead {
+        font-size: var(--x-fs-small);
+        line-height: 1.5;
+      }
+    }
+
     &--center {
       text-align: center;
 

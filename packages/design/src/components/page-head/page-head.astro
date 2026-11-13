@@ -1,7 +1,14 @@
 ---
 import './page-head.scss'
 import type { HTMLAttributes } from 'astro/types'
-import { pageHeadClass, pageHeadClasses as c, pageHeadTag, type PageHeadAlign, type PageHeadLevel } from './index.ts'
+import {
+  pageHeadClass,
+  pageHeadClasses as c,
+  pageHeadTag,
+  pageHeadTitleTabIndex,
+  type PageHeadAlign,
+  type PageHeadLevel,
+} from './index.ts'
 
 type Props = Omit<HTMLAttributes<'header'>, 'class' | 'title'> & {
   class?: string
@@ -12,15 +19,30 @@ type Props = Omit<HTMLAttributes<'header'>, 'class' | 'title'> & {
   lead?: string
   level?: PageHeadLevel
   titleId?: string
+  /** Lets a script move focus to the title, for example after a screen change. */
+  titleFocusable?: boolean
   align?: PageHeadAlign
+  compact?: boolean
 }
 
-const { title, eyebrow, lead, level, titleId, align, class: className, slot: _slot, ...rest } = Astro.props
+const {
+  title,
+  eyebrow,
+  lead,
+  level,
+  titleId,
+  titleFocusable,
+  align,
+  compact,
+  class: className,
+  slot: _slot,
+  ...rest
+} = Astro.props
 const Heading = pageHeadTag(level)
 const hasLead = (lead !== undefined && lead !== '') || Astro.slots.has('lead')
 ---
 
-<header class={pageHeadClass({ align, className })} {...rest}>
+<header class={pageHeadClass({ align, compact, className })} {...rest}>
   {
     Astro.slots.has('breadcrumbs') && (
       <div class={c.crumbs}>
@@ -31,7 +53,7 @@ const hasLead = (lead !== undefined && lead !== '') || Astro.slots.has('lead')
   <div class={c.body}>
     <div class={c.titles}>
       {eyebrow && <p class={c.eyebrow}>{eyebrow}</p>}
-      <Heading class={c.title} id={titleId}>
+      <Heading class={c.title} id={titleId} tabindex={pageHeadTitleTabIndex(titleFocusable)}>
         <slot name="title">{title}</slot>
       </Heading>
       {

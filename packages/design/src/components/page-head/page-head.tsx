@@ -1,6 +1,13 @@
 import './page-head.scss'
-import { createElement, type HTMLAttributes, type ReactNode } from 'react'
-import { pageHeadClass, pageHeadClasses as c, pageHeadTag, type PageHeadAlign, type PageHeadLevel } from './index.ts'
+import { createElement, type HTMLAttributes, type ReactNode, type Ref } from 'react'
+import {
+  pageHeadClass,
+  pageHeadClasses as c,
+  pageHeadTag,
+  pageHeadTitleTabIndex,
+  type PageHeadAlign,
+  type PageHeadLevel,
+} from './index.ts'
 
 export type PageHeadProps = Omit<HTMLAttributes<HTMLElement>, 'title'> & {
   title: ReactNode
@@ -14,7 +21,11 @@ export type PageHeadProps = Omit<HTMLAttributes<HTMLElement>, 'title'> & {
   actions?: ReactNode
   level?: PageHeadLevel
   titleId?: string
+  /** Lets a script move focus to the title, for example after a screen change. */
+  titleFocusable?: boolean
+  titleRef?: Ref<HTMLHeadingElement>
   align?: PageHeadAlign
+  compact?: boolean
 }
 
 const has = (node: ReactNode) => node != null && node !== '' && node !== false
@@ -28,20 +39,27 @@ export function PageHead({
   actions,
   level,
   titleId,
+  titleFocusable,
+  titleRef,
   align,
+  compact,
   className,
   ...rest
 }: PageHeadProps) {
   return (
     <header
       {...rest}
-      className={pageHeadClass({ align, className })}
+      className={pageHeadClass({ align, compact, className })}
     >
       {has(breadcrumbs) && <div className={c.crumbs}>{breadcrumbs}</div>}
       <div className={c.body}>
         <div className={c.titles}>
           {has(eyebrow) && <p className={c.eyebrow}>{eyebrow}</p>}
-          {createElement(pageHeadTag(level), { className: c.title, id: titleId }, title)}
+          {createElement(
+            pageHeadTag(level),
+            { className: c.title, id: titleId, tabIndex: pageHeadTitleTabIndex(titleFocusable), ref: titleRef },
+            title,
+          )}
           {has(lead) && <p className={c.lead}>{lead}</p>}
           {has(meta) && <div className={c.meta}>{meta}</div>}
         </div>

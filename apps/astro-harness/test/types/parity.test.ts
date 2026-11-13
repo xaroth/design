@@ -130,7 +130,8 @@ it('Astro and React props agree', () => {
   none<Parity<typeof A.Grid, typeof R.Grid, 'div', El>>()
   none<Parity<typeof A.Section, typeof R.Section, 'section', El>>()
   none<Parity<typeof A.SectionHead, typeof R.SectionHead, 'header', El>>()
-  none<Parity<typeof A.PageHead, typeof R.PageHead, 'header', El>>()
+  // React hands out the title element for focus; Astro has no refs.
+  none<Parity<typeof A.PageHead, typeof R.PageHead, 'header', El, 'titleRef'>>()
   none<Parity<typeof A.Pagination, typeof R.Pagination, 'nav', El>>()
   none<Parity<typeof A.Panel, typeof R.Panel, 'div', El>>()
   none<Parity<typeof A.CodeBlock, typeof R.CodeBlock, 'figure', El>>()

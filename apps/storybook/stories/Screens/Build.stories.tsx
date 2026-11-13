@@ -4,7 +4,7 @@ import {
   DescriptionListGroup,
   DescriptionListGroups,
   EmptyState,
-  SectionHead,
+  PageHead,
   Workspace,
 } from '@xaroth.nl/design/react'
 import { appHeader, screen } from './screens.tsx'
@@ -80,16 +80,18 @@ const tree = (
 
 const panel = (
   <div className="x-p-md x-density-compact">
-    <SectionHead
-      level={2}
+    <PageHead
+      compact
+      titleFocusable
       title="Marauder"
-      sub="Level 1, 12 points left"
+      lead="Level 1, 12 points left"
     />
     <DescriptionListGroups>
       {stats.map((group) => (
         <DescriptionListGroup
           key={group.title}
           title={group.title}
+          level={2}
         >
           <DescriptionList
             layout="inline"
