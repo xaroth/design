@@ -1,0 +1,74 @@
+---
+import './item-card.scss'
+import type { HTMLAttributes } from 'astro/types'
+import {
+  itemCardClass,
+  itemCardClasses as c,
+  itemCardShowsBase,
+  itemModClass,
+  itemModLine,
+  itemModNote,
+  itemRarityLabels,
+  type ItemCardHeadingLevel,
+  type ItemCardOptions,
+  type ItemModLine,
+} from './index.ts'
+
+type Props = Omit<HTMLAttributes<'article'>, 'class'> &
+  Omit<ItemCardOptions, 'className'> & {
+    class?: string
+    name: string
+    /** The base type. Hidden when it equals the name. */
+    base?: string
+    implicits?: readonly ItemModLine[]
+    mods?: readonly ItemModLine[]
+    headingLevel?: ItemCardHeadingLevel
+    /** Shown after a line that does not count. */
+    uncountedLabel?: string
+  }
+
+const {
+  rarity,
+  name,
+  base,
+  implicits = [],
+  mods = [],
+  headingLevel = 3,
+  uncountedLabel = 'not counted',
+  class: className,
+  slot: _slot,
+  ...rest
+} = Astro.props
+const Heading = `h${headingLevel}` as const
+const groups = [
+  { lines: implicits, className: c.implicits },
+  { lines: mods, className: c.mods },
+].filter((group) => group.lines.length > 0)
+---
+
+<article {...rest} class={itemCardClass({ rarity, className })}>
+  <div class={c.head}>
+    <Heading class={c.name}>{name}</Heading>
+    <span class={c.rarity}>{itemRarityLabels[rarity ?? 'normal']}</span>
+    {itemCardShowsBase(name, base) && <p class={c.base}>{base}</p>}
+  </div>
+  {
+    groups.map((group) => (
+      <ul class={group.className}>
+        {group.lines.map(itemModLine).map(({ text, counted }) => (
+          <li class={itemModClass(counted)}>
+            {text}
+            {!counted && <span class="x-item-card__note">{itemModNote(uncountedLabel)}</span>}
+          </li>
+        ))}
+      </ul>
+    ))
+  }
+  {
+    Astro.slots.has('default') && (
+      <div class={c.footer}>
+        <slot />
+      </div>
+    )
+  }
+</article>

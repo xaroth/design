@@ -51,6 +51,12 @@
   --x-color-on-danger: #0b0806;
   --x-color-danger-wash: rgb(224 115 90 / 8%);
 
+  // Item rarity, after the game's colors, lightened where needed for contrast on dark surfaces.
+  --x-color-rarity-normal: #d2d0cc;
+  --x-color-rarity-magic: #9c9eff;
+  --x-color-rarity-rare: #f0e07a;
+  --x-color-rarity-unique: #dc8d52;
+
   // Theme extras, only used by xaroth part styling.
   --x-color-sand: #d8c29a;
   --x-color-bronze: #a37b49;
