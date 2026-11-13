@@ -57,6 +57,16 @@ Props, slots and every variant are documented in the Storybook of the [source re
 
 `@xaroth.nl/design/scss/*` exposes the layer order (`_layers.scss`), the theme scope mixins (`_theme.scss`) and the cut-corner helpers (`_chamfer.scss`) for sites that build on the system.
 
+## Favicons
+
+`@xaroth.nl/design/favicon/pbt.svg`, `favicon/pbt.ico` (16, 32 and 48 px) and `favicon/pbt-180.png` (touch icon). Copy them into the site's build and link them:
+
+```html
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+```
+
 ## Requirements
 
 A bundler that handles CSS imports from packages (Astro, Vite, Next). Modern browsers only (Baseline widely available). `astro` 7 and `react` 19 are optional peers: install the one you use.

@@ -44,7 +44,12 @@
       "source": "./src/styles/all.scss",
       "default": "./dist/all.css"
     },
-    "./scss/*": "./dist/scss/*"
+    "./scss/*": "./dist/scss/*",
+    "./favicon/*.svg": {
+      "source": "./src/favicon/*.svg",
+      "default": "./dist/favicon/*.svg"
+    },
+    "./favicon/*": "./dist/favicon/*"
   },
   "files": [
     "dist"
@@ -83,6 +88,7 @@
     }
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "astro": "catalog:",
@@ -109,7 +115,8 @@
       "./themes/*.css": "./dist/themes/*.css",
       "./themes.css": "./dist/themes.css",
       "./all.css": "./dist/all.css",
-      "./scss/*": "./dist/scss/*"
+      "./scss/*": "./dist/scss/*",
+      "./favicon/*": "./dist/favicon/*"
     }
   }
 }
