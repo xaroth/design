@@ -1,5 +1,15 @@
 # @xaroth.nl/design
 
+## 0.9.0
+
+### Minor Changes
+
+- [#48](https://github.com/xaroth/design/pull/48)
+  [`0050ce8`](https://github.com/xaroth/design/commit/0050ce810c189f74774d1cc966f18cbde5ebdf20) - Add `HoverCard`: a
+  small card with a title, lines and optional body, shown at a point inside its positioned container and kept inside it.
+  It flips to the side of the point that has room, in CSS only, for things without a DOM element of their own such as
+  nodes on a canvas.
+
 ## 0.8.0
 
 ### Minor Changes
