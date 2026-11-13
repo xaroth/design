@@ -1,5 +1,13 @@
 # @xaroth.nl/design
 
+## 0.10.0
+
+### Minor Changes
+
+- [#50](https://github.com/xaroth/design/pull/50)
+  [`0bc021a`](https://github.com/xaroth/design/commit/0bc021a2e0c7a49af8ee179c142e699bdfb1280e) - Add StatChangeList and
+  StatChange: rows of a stat's name, old value and new value, marked better, worse or neutral by color and shape.
+
 ## 0.9.0
 
 ### Minor Changes
