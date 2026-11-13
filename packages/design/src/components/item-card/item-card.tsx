@@ -1,5 +1,6 @@
 import './item-card.scss'
 import type { HTMLAttributes, ReactNode } from 'react'
+import { isEmptyContent } from '../../content.ts'
 import {
   itemCardClass,
   itemCardClasses as c,
@@ -90,7 +91,7 @@ export function ItemCard({
           uncountedLabel={uncountedLabel}
         />
       )}
-      {children != null && <div className={c.footer}>{children}</div>}
+      {!isEmptyContent(children) && <div className={c.footer}>{children}</div>}
     </article>
   )
 }
