@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import * as sass from 'sass'
 import { themeIds } from '../src/config.ts'
+import { buildFavicons } from './favicon.ts'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const dist = join(root, 'dist')
@@ -36,6 +37,7 @@ for (const family of await readdir(join(root, 'src/components'))) {
   }
 }
 await copyFile(join(root, 'src/env.d.ts'), join(dist, 'env.d.ts'))
+await buildFavicons(join(root, 'src/favicon'), join(dist, 'favicon'))
 
 // Public Sass helpers for sites that build on the system.
 await mkdir(join(dist, 'scss'), { recursive: true })
