@@ -32,6 +32,19 @@ const cases: { name: string; props: Record<string, unknown>; slots?: Record<stri
       default: ['<p>Axe</p>', createElement('p', null, 'Axe')],
     },
   },
+  {
+    name: 'link to choose a filled slot, current',
+    props: { label: 'Gloves', href: '#gloves', current: true },
+    slots: { default: ['<span>Doom Knuckle</span>', createElement('span', null, 'Doom Knuckle')] },
+  },
+  { name: 'link to choose an empty slot', props: { label: 'Ring 2', href: '#ring-2' } },
+  {
+    name: 'link with an empty label slot',
+    props: { label: 'Ring 2', href: '#ring-2' },
+    slots: { emptyLabel: ['<em>None</em>', createElement('em', null, 'None')] },
+  },
+  { name: 'false child is empty', props: { label: 'Ring 2' }, slots: { default: ['', false] } },
+  { name: 'whitespace child is empty', props: { label: 'Ring 2', href: '#r' }, slots: { default: ['  ', null] } },
   { name: 'extra class and attrs', props: { label: 'Amulet', class: 'slot', id: 'amulet', 'data-slot': 'Amulet' } },
 ]
 

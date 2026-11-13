@@ -26,30 +26,32 @@ const contents = { item: 'item', empty: 'empty' }
 const meta = {
   title: 'EquipmentSlot/EquipmentSlot',
   component: EquipmentSlot,
-  args: { label: 'Gloves', headingLevel: 3, current: false, emptyLabel: 'Empty', children: 'item' as never },
+  args: { label: 'Gloves', headingLevel: 3, href: '', current: false, emptyLabel: 'Empty', children: 'item' as never },
   argTypes: {
     label: { control: 'text' },
     headingLevel: { control: 'inline-radio', options: [2, 3, 4, 5, 6] },
+    href: { control: 'text' },
     current: { control: 'boolean' },
     emptyLabel: { control: 'text' },
     children: { control: 'inline-radio', options: Object.keys(contents) },
     actions: { control: false },
   },
   // A slot is a list item, so it always sits in EquipmentSlots.
-  render: ({ children, ...args }) => {
+  render: ({ children, href, ...args }) => {
     const filled = (children as unknown) === 'item'
     return (
       <EquipmentSlots style={{ maxWidth: 340 }}>
         <EquipmentSlot
           {...args}
+          href={href || undefined}
           actions={filled ? remove : paste}
         >
-          {filled ? (
+          {filled && (
             <ItemCard
               {...item('Gloves')}
               headingLevel={4}
             />
-          ) : undefined}
+          )}
         </EquipmentSlot>
       </EquipmentSlots>
     )
@@ -88,7 +90,7 @@ export const Variants: StoryObj<typeof meta> = {
         </EquipmentSlots>
       </Row>
       <Row
-        label="List: a row per slot, the current one marked"
+        label="List: a row per slot links to it, empty ones too; the current one marked"
         stack
       >
         <EquipmentSlots
@@ -100,13 +102,10 @@ export const Variants: StoryObj<typeof meta> = {
             <EquipmentSlot
               key={slot}
               label={slot}
+              href={`#${slot}`}
               current={slot === 'Gloves'}
             >
-              {it && (
-                <a href={`#${slot}`}>
-                  <ItemName rarity={it.rarity}>{it.name}</ItemName>
-                </a>
-              )}
+              {it && <ItemName rarity={it.rarity}>{it.name}</ItemName>}
             </EquipmentSlot>
           ))}
         </EquipmentSlots>
@@ -119,7 +118,7 @@ export const States: StoryObj<typeof meta> = {
   parameters: matrix,
   render: () => (
     <Rows>
-      <Row label="Empty, empty with an own label, current">
+      <Row label="Empty, empty with an own label, filled">
         <EquipmentSlots
           aria-label="States"
           style={{ width: '100%' }}
@@ -132,10 +131,7 @@ export const States: StoryObj<typeof meta> = {
             label="Weapon 2"
             emptyLabel="Blocked by a two-handed weapon"
           />
-          <EquipmentSlot
-            label="Belt"
-            current
-          >
+          <EquipmentSlot label="Belt">
             <ItemCard
               {...item('Belt')}
               headingLevel={4}

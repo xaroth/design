@@ -30,6 +30,15 @@ export const equipmentSlotClasses = {
   actions: slot.el('actions'),
   body: slot.el('body'),
   empty: slot.el('empty'),
+  link: slot.el('link'),
 } as const
 
-export const equipmentSlotAttrs = (current?: boolean) => (current ? { 'aria-current': 'true' as const } : {})
+// On the slot's link, which is what a screen reader lands on when choosing a slot.
+export const equipmentSlotLinkAttrs = (href: string, current?: boolean) => ({
+  href,
+  ...(current && { 'aria-current': 'true' as const }),
+})
+
+// React renders nothing for these, so a slot given `{item && <ItemCard />}` without an item is empty.
+export const isEmptySlotContent = (content: unknown): boolean =>
+  content == null || typeof content === 'boolean' || content === ''

@@ -1,10 +1,11 @@
 import './equipment-slot.scss'
 import type { HTMLAttributes, ReactNode } from 'react'
 import {
-  equipmentSlotAttrs,
   equipmentSlotClass,
   equipmentSlotClasses as c,
+  equipmentSlotLinkAttrs,
   equipmentSlotsClass,
+  isEmptySlotContent,
   type EquipmentSlotHeadingLevel,
   type EquipmentSlotsOptions,
 } from './index.ts'
@@ -25,7 +26,9 @@ export type EquipmentSlotProps = Omit<HTMLAttributes<HTMLLIElement>, 'children'>
   /** The slot's name, for example "Helmet". */
   label: ReactNode
   headingLevel?: EquipmentSlotHeadingLevel
-  /** The slot is the one shown elsewhere, as in a list beside a detail view. */
+  /** Makes the item, or the empty label, a link that chooses the slot, as in a list beside a detail view. */
+  href?: string
+  /** The slot is the chosen one. Marked on the link when there is one. */
   current?: boolean
   /** Buttons for the slot, for example paste or remove. */
   actions?: ReactNode
@@ -38,6 +41,7 @@ export type EquipmentSlotProps = Omit<HTMLAttributes<HTMLLIElement>, 'children'>
 export function EquipmentSlot({
   label,
   headingLevel = 3,
+  href,
   current,
   actions,
   emptyLabel = 'Empty',
@@ -46,18 +50,29 @@ export function EquipmentSlot({
   ...rest
 }: EquipmentSlotProps) {
   const Heading = `h${headingLevel}` as const
-  const empty = children == null
+  const empty = isEmptySlotContent(children)
+  const content = empty ? <p className={c.empty}>{emptyLabel}</p> : children
   return (
     <li
       {...rest}
-      {...equipmentSlotAttrs(current)}
       className={equipmentSlotClass({ empty, current, className })}
     >
       <div className={c.head}>
         <Heading className={c.label}>{label}</Heading>
         {actions != null && <div className={c.actions}>{actions}</div>}
       </div>
-      <div className={c.body}>{empty ? <p className={c.empty}>{emptyLabel}</p> : children}</div>
+      <div className={c.body}>
+        {href != null ? (
+          <a
+            className={c.link}
+            {...equipmentSlotLinkAttrs(href, current)}
+          >
+            {content}
+          </a>
+        ) : (
+          content
+        )}
+      </div>
     </li>
   )
 }
