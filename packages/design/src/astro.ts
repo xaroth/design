@@ -26,6 +26,7 @@ export { default as FilterLayout } from './components/filters/filter-layout.astr
 export { default as FilterPanel } from './components/filters/filter-panel.astro'
 export { default as Footer } from './components/footer/footer.astro'
 export { default as Header } from './components/header/header.astro'
+export { default as HoverCard } from './components/hover-card/hover-card.astro'
 export { default as Icon } from './components/icon/icon.astro'
 export { default as Container } from './components/layout/container.astro'
 export { default as Grid } from './components/layout/grid.astro'
