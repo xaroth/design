@@ -1,0 +1,13 @@
+---
+import './item-card.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { itemNameClass, itemNameRarityText, type ItemCardOptions } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'span'>, 'class'> & Omit<ItemCardOptions, 'className'> & { class?: string }
+
+const { rarity, class: className, slot: _slot, ...rest } = Astro.props
+---
+
+<span {...rest} class={itemNameClass({ rarity, className })}
+  ><slot /><span class="x-visually-hidden">{itemNameRarityText(rarity)}</span></span
+>

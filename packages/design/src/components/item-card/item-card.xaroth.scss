@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('xaroth') {
+  .x-item-card__name {
+    font-family: var(--x-font-heading);
+  }
+}

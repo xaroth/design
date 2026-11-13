@@ -1,0 +1,33 @@
+---
+import Harness from '../layouts/Harness.astro'
+import { ItemCard, ItemName } from '@xaroth.nl/design/astro'
+
+const items = [
+  { rarity: 'normal', name: 'Leather Belt', base: 'Leather Belt', implicits: ['+32 to maximum Life'] },
+  { rarity: 'magic', name: 'Sapphire Ring of the Lynx', implicits: ['+24% to Cold Resistance'], mods: [{ text: '+20 to Dexterity', counted: false }] },
+  {
+    rarity: 'rare',
+    name: 'Doom Knuckle',
+    base: 'Titan Gauntlets',
+    mods: ['+72 to maximum Life', '+38% to Fire Resistance', { text: '+30 to Strength', counted: false }],
+  },
+  { rarity: 'unique', name: 'Kaom’s Heart', base: 'Glorious Plate', mods: ['+500 to maximum Life', 'Has no Sockets'] },
+] as const
+---
+
+<Harness title="Item card">
+  {() => (
+    <div style="padding: 32px; display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr))">
+      {items.map((item) => (
+        <ItemCard {...item}>
+          <button type="button">Remove</button>
+        </ItemCard>
+      ))}
+      <p>
+        {items.map((item) => (
+          <ItemName rarity={item.rarity}>{item.name} </ItemName>
+        ))}
+      </p>
+    </div>
+  )}
+</Harness>
