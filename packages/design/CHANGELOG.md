@@ -1,5 +1,13 @@
 # @xaroth.nl/design
 
+## 0.12.1
+
+### Patch Changes
+
+- [#60](https://github.com/xaroth/design/pull/60)
+  [`58d72e8`](https://github.com/xaroth/design/commit/58d72e81433ad5e1b29caea24deb1781c59f1a40) - ItemCard shows no
+  footer when its children are false, null or blank, in React and Astro.
+
 ## 0.12.0
 
 ### Minor Changes
