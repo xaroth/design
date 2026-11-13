@@ -1,0 +1,102 @@
+@use '../../styles/layers';
+
+@layer x.core {
+  // Part-local properties (themes may override):
+  //   --x-stat-change-name-color  name color
+  //   --x-stat-change-from-color  old value color
+  //   --x-stat-change-gap         space between rows
+  // Size and row gap follow the area's density (x-density-*) when one is set; otherwise the text around it.
+  // Rows share the list's columns, so values line up across rows: name, old, arrow, new, mark.
+  .x-stat-change-list {
+    --x-stat-change-name-color: var(--x-color-text-muted);
+    --x-stat-change-from-color: var(--x-color-text-muted);
+    --x-stat-change-gap: var(--x-density-row-gap, var(--x-space-1));
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) repeat(4, auto);
+    gap: var(--x-stat-change-gap) var(--x-space-2);
+    min-width: 0;
+    margin: 0;
+    font-size: var(--x-density-fs, 1em);
+    line-height: 1.4;
+  }
+
+  .x-stat-change {
+    --x-stat-change-color: var(--x-color-text);
+    --x-stat-change-mark: var(--x-color-text-faint);
+
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+    align-items: baseline;
+
+    &__name {
+      min-width: 0;
+      color: var(--x-stat-change-name-color);
+      overflow-wrap: anywhere;
+    }
+
+    &__values {
+      display: grid;
+      grid-column: 2 / -1;
+      grid-template-columns: subgrid;
+      align-items: baseline;
+      margin: 0;
+      font-variant-numeric: lining-nums tabular-nums;
+      white-space: nowrap;
+    }
+
+    &__from {
+      justify-self: end;
+      color: var(--x-stat-change-from-color);
+    }
+
+    &__arrow {
+      color: var(--x-color-text-faint);
+    }
+
+    &__to {
+      justify-self: end;
+      color: var(--x-stat-change-color);
+    }
+
+    &__mark {
+      display: inline-flex;
+      align-self: center;
+      color: var(--x-stat-change-mark);
+    }
+
+    // Shape as well as color, so the effect reads without telling red from green: up better, down worse, a bar
+    // neither.
+    &__shape {
+      flex: none;
+      width: 0.6em;
+      height: 0.55em;
+      background: currentcolor;
+      clip-path: inset(38% 0);
+
+      @media (forced-colors: active) {
+        forced-color-adjust: none;
+        background: CanvasText;
+      }
+    }
+
+    &--better {
+      --x-stat-change-color: var(--x-color-success);
+      --x-stat-change-mark: var(--x-color-success);
+    }
+
+    &--better &__shape {
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    &--worse {
+      --x-stat-change-color: var(--x-color-danger);
+      --x-stat-change-mark: var(--x-color-danger);
+    }
+
+    &--worse &__shape {
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+  }
+}

@@ -1,0 +1,42 @@
+---
+import './stat-change.scss'
+import type { HTMLAttributes } from 'astro/types'
+import {
+  statChangeClass,
+  statChangeEffectLabel,
+  statChangeToLabel,
+  type StatChangeOptions,
+} from './index.ts'
+
+type Props = Omit<HTMLAttributes<'div'>, 'class'> &
+  Omit<StatChangeOptions, 'className'> & {
+    class?: string
+    /** Plain-text name; the `name` slot takes markup. */
+    name?: string
+    /** The value before the change, formatted. The `from` slot takes markup. */
+    from?: string | number
+    /** The value after the change, formatted. The `to` slot takes markup. */
+    to?: string | number
+    /** Read after the new value; defaults to the effect, and to nothing when neutral. */
+    label?: string
+  }
+
+const { effect, name, from, to, label, class: className, slot: _slot, ...rest } = Astro.props
+const effectLabel = statChangeEffectLabel(effect, label)
+---
+
+<div {...rest} class={statChangeClass({ effect, className })}>
+  <dt class="x-stat-change__name"><slot name="name">{name}</slot></dt>
+  <dd class="x-stat-change__values">
+    <span class="x-stat-change__from"><slot name="from">{from}</slot></span>
+    <span class="x-stat-change__arrow"
+      ><span aria-hidden="true">→</span><span class="x-visually-hidden">{statChangeToLabel}</span></span
+    >
+    <span class="x-stat-change__to"><slot name="to">{to}</slot></span>
+    <span class="x-stat-change__mark"
+      ><span class="x-stat-change__shape" aria-hidden="true"></span>{
+        effectLabel && <span class="x-visually-hidden">{effectLabel}</span>
+      }</span
+    >
+  </dd>
+</div>

@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('eve-online') {
+  .x-stat-change__to {
+    font-weight: 500;
+  }
+}

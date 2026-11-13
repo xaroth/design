@@ -1,0 +1,11 @@
+---
+import './stat-change.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { statChangeListClass, type StatChangeListOptions } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'dl'>, 'class'> & Omit<StatChangeListOptions, 'className'> & { class?: string }
+
+const { class: className, slot: _slot, ...rest } = Astro.props
+---
+
+<dl {...rest} class={statChangeListClass({ className })}><slot /></dl>

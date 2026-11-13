@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-stat-change__to {
+    font-weight: 600;
+  }
+}
