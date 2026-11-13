@@ -1,19 +1,30 @@
 ---
 import './workspace.scss'
 import type { HTMLAttributes } from 'astro/types'
-import { workspaceClass, workspaceClasses as c, workspacePanelAttrs } from './index.ts'
+import {
+  workspaceClass,
+  workspaceClasses as c,
+  workspaceMainClass,
+  workspacePanelAttrs,
+  workspaceScrollAttrs,
+  type WorkspaceOptions,
+} from './index.ts'
 
-type Props = Omit<HTMLAttributes<'div'>, 'class'> & {
+type Props = Omit<HTMLAttributes<'div'>, 'class'> &
+  Omit<WorkspaceOptions, 'className'> & {
   class?: string
   /** Accessible name of the side panel. */
   panelLabel: string
 }
 
-const { panelLabel, class: className, slot: _slot, ...rest } = Astro.props
+const { panelLabel, scroll, class: className, slot: _slot, ...rest } = Astro.props
+const hasNav = Astro.slots.has('nav')
+const mainScroll = workspaceScrollAttrs(scroll && !hasNav).tabIndex
+const viewScroll = workspaceScrollAttrs(scroll).tabIndex
 const { tabIndex, ...panelAttrs } = workspacePanelAttrs(panelLabel)
 ---
 
-<div {...rest} class={workspaceClass({ className })}>
+<div {...rest} class={workspaceClass({ scroll, className })}>
   {
     Astro.slots.has('header') && (
       <div class={c.header}>
@@ -22,7 +33,22 @@ const { tabIndex, ...panelAttrs } = workspacePanelAttrs(panelLabel)
     )
   }
   <div class={c.body}>
-    <main class={c.main}><slot /></main>
+    <main class={workspaceMainClass(hasNav)} tabindex={mainScroll}>
+      {
+        hasNav ? (
+          <>
+            <div class={c.nav}>
+              <slot name="nav" />
+            </div>
+            <div class={c.view} tabindex={viewScroll}>
+              <slot />
+            </div>
+          </>
+        ) : (
+          <slot />
+        )
+      }
+    </main>
     <aside class={c.panel} {...panelAttrs} tabindex={tabIndex}><slot name="panel" /></aside>
   </div>
 </div>

@@ -1,10 +1,15 @@
 ---
 import Harness from '../layouts/Harness.astro'
-import { DescriptionList, Header, Workspace } from '@xaroth.nl/design/astro'
+import { DescriptionList, Header, Tabs, Workspace } from '@xaroth.nl/design/astro'
 
 const frames = [
   { label: 'Desktop', style: 'height: 560px' },
   { label: '390 px', style: 'height: 720px; max-width: 390px' },
+  { label: 'Tabs above a scrolling main region', style: 'height: 560px', nav: true },
+]
+const views = [
+  { label: 'Tree', href: '#tree' },
+  { label: 'Items', href: '#items', current: true },
 ]
 const rows = Array.from({ length: 14 }, (_, i) => ({ term: `Value ${i + 1}`, value: String((i + 1) * 12) }))
 ---
@@ -12,10 +17,11 @@ const rows = Array.from({ length: 14 }, (_, i) => ({ term: `Value ${i + 1}`, val
 <Harness title="Workspace">
   {(theme: string) => (
     <div style="padding: 0 32px; display: grid; gap: 32px">
-      {frames.map(({ label, style }, i) => (
+      {frames.map(({ label, style, nav }, i) => (
         <div>
           <p style="margin-bottom: 8px">{label}</p>
-          <Workspace panelLabel="Details" style={`${style}; outline: 1px dashed currentColor`}>
+          <Workspace panelLabel="Details" scroll={nav} style={`${style}; outline: 1px dashed currentColor`}>
+            {nav && <Tabs slot="nav" items={views} label={`Views ${theme}`} />}
             <Header slot="header" items={[{ label: 'Build', href: '#', current: true }, { label: 'Help', href: '#help' }]} navLabel={`Main ${theme} ${i}`}>
               <span slot="brand">App</span>
             </Header>
