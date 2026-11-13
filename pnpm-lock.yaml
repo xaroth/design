@@ -108,9 +108,6 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.3.0(@types/react@19.3.0)
-      happy-dom:
-        specifier: ^20.0.0
-        version: 20.14.5
       sass:
         specifier: 'catalog:'
         version: 1.108.1
@@ -243,18 +240,30 @@ importers:
       '@types/react':
         specifier: 'catalog:'
         version: 19.3.0
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.3.0(@types/react@19.3.0)
       astro:
         specifier: 'catalog:'
         version: 7.4.8(@types/node@24.13.6)(esbuild@0.28.2)(sass@1.108.1)(yaml@2.9.1)
+      happy-dom:
+        specifier: ^20.0.0
+        version: 20.14.5
       react:
         specifier: 'catalog:'
         version: 19.3.1
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.3.1(react@19.3.1)
       sass:
         specifier: 'catalog:'
         version: 1.108.1
       typescript:
         specifier: 'catalog:'
         version: 6.0.2
+      vitest:
+        specifier: 'catalog:'
+        version: 5.1.0(@types/node@24.13.6)(happy-dom@20.14.5)(vite@8.3.7(@types/node@24.13.6)(esbuild@0.28.2)(sass@1.108.1)(yaml@2.9.1))
 
 packages:
 
