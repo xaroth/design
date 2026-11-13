@@ -40,6 +40,28 @@
       overflow: hidden;
     }
 
+    &__main--nav {
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    &__nav {
+      padding-inline: var(--x-space-4);
+    }
+
+    &__view {
+      display: grid;
+      grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+      min-block-size: 0;
+      overflow: hidden;
+    }
+
+    // With a nav the view scrolls, so the tabs stay in place.
+    &--scroll &__main:not(.x-workspace__main--nav),
+    &--scroll &__view {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
     &__panel {
       min-block-size: 0;
       overflow-y: auto;
