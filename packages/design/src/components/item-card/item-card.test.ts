@@ -1,10 +1,11 @@
-import { createElement } from 'react'
+import { createElement, type ReactNode } from 'react'
 import { describe, it } from 'vitest'
 import { ItemCard, ItemName } from '../../react.ts'
 import { expectSameHtml } from '../../../test/compare.ts'
 import { ItemCard as AstroItemCard, ItemName as AstroItemName } from '../../astro.ts'
 
-const cases: { name: string; props: Record<string, unknown>; body?: string }[] = [
+// Astro takes the footer as HTML, or no slot, React the same content as children.
+const cases: { name: string; props: Record<string, unknown>; body?: [string | undefined, ReactNode] }[] = [
   { name: 'normal by default, base equal to name', props: { name: 'Iron Ring', base: 'Iron Ring' } },
   {
     name: 'rare with implicits and mods',
@@ -35,7 +36,13 @@ const cases: { name: string; props: Record<string, unknown>; body?: string }[] =
       headingLevel: 4,
     },
   },
-  { name: 'footer', props: { name: 'Leather Belt' }, body: '<button type="button">Remove</button>' },
+  {
+    name: 'footer',
+    props: { name: 'Leather Belt' },
+    body: ['<button type="button">Remove</button>', createElement('button', { type: 'button' }, 'Remove')],
+  },
+  { name: 'false footer is empty', props: { name: 'Leather Belt' }, body: [undefined, false] },
+  { name: 'whitespace footer is empty', props: { name: 'Leather Belt' }, body: ['  ', null] },
   { name: 'extra class and attrs', props: { name: 'A', class: 'item', id: 'helmet', 'data-slot': 'Helmet' } },
 ]
 
@@ -45,12 +52,8 @@ describe('ItemCard renders the same HTML in Astro and React', () => {
       const { class: className, ...rest } = props
       await expectSameHtml(
         AstroItemCard,
-        { props, slots: body ? { default: body } : {} },
-        createElement(
-          ItemCard,
-          { ...rest, className } as never,
-          body ? createElement('button', { type: 'button' }, 'Remove') : undefined,
-        ),
+        { props, slots: body?.[0] != null ? { default: body[0] } : {} },
+        createElement(ItemCard, { ...rest, className } as never, body?.[1]),
       )
     })
   }

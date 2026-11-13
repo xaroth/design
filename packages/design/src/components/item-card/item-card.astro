@@ -1,6 +1,7 @@
 ---
 import './item-card.scss'
 import type { HTMLAttributes } from 'astro/types'
+import { isEmptyContent } from '../../content.ts'
 import {
   itemCardClass,
   itemCardClasses as c,
@@ -44,6 +45,8 @@ const groups = [
   { lines: implicits, className: c.implicits },
   { lines: mods, className: c.mods },
 ].filter((group) => group.lines.length > 0)
+// Rendered first, so a card given `{canRemove && <Button />}` without the action has no footer.
+const footer = Astro.slots.has('default') ? await Astro.slots.render('default') : undefined
 ---
 
 <article {...rest} class={itemCardClass({ rarity, className })}>
@@ -65,9 +68,9 @@ const groups = [
     ))
   }
   {
-    Astro.slots.has('default') && (
+    !isEmptyContent(footer?.trim()) && (
       <div class={c.footer}>
-        <slot />
+        <Fragment set:html={footer} />
       </div>
     )
   }
