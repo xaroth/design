@@ -1,0 +1,11 @@
+---
+import './equipment-slot.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { equipmentSlotsClass, type EquipmentSlotsOptions } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'ul'>, 'class'> & Omit<EquipmentSlotsOptions, 'className'> & { class?: string }
+
+const { layout, class: className, slot: _slot, ...rest } = Astro.props
+---
+
+<ul {...rest} class={equipmentSlotsClass({ layout, className })}><slot /></ul>

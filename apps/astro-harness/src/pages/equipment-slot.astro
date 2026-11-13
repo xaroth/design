@@ -1,0 +1,26 @@
+---
+import Harness from '../layouts/Harness.astro'
+import { Button, EquipmentSlot, EquipmentSlots, ItemCard, ItemName } from '@xaroth.nl/design/astro'
+---
+
+<Harness title="Equipment slot">
+  {() => (
+    <div style="padding: 32px; display: grid; gap: 32px">
+      <EquipmentSlots aria-label="Equipment, grid">
+        <EquipmentSlot label="Gloves">
+          <Button slot="actions" variant="tertiary" size="sm">Remove</Button>
+          <ItemCard rarity="rare" name="Doom Knuckle" base="Titan Gauntlets" headingLevel={4} mods={['+72 to maximum Life']} />
+        </EquipmentSlot>
+        <EquipmentSlot label="Ring 2">
+          <Button slot="actions" variant="secondary" size="sm">Paste item</Button>
+        </EquipmentSlot>
+      </EquipmentSlots>
+      <EquipmentSlots layout="list" aria-label="Equipment, list" style="max-width: 360px">
+        <EquipmentSlot label="Gloves" href="#gloves" current>
+          <ItemName rarity="rare">Doom Knuckle</ItemName>
+        </EquipmentSlot>
+        <EquipmentSlot label="Ring 2" href="#ring-2" />
+      </EquipmentSlots>
+    </div>
+  )}
+</Harness>

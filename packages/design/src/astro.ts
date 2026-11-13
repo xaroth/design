@@ -13,6 +13,8 @@ export { default as ConfirmDialog } from './components/dialog/confirm-dialog.ast
 export { default as Dialog } from './components/dialog/dialog.astro'
 export { default as Divider } from './components/divider/divider.astro'
 export { default as EmptyState } from './components/empty-state/empty-state.astro'
+export { default as EquipmentSlot } from './components/equipment-slot/equipment-slot.astro'
+export { default as EquipmentSlots } from './components/equipment-slot/equipment-slots.astro'
 export { default as CheckboxGroup } from './components/field/checkbox-group.astro'
 export { default as Checkbox } from './components/field/checkbox.astro'
 export { default as Field } from './components/field/field.astro'
