@@ -16,6 +16,11 @@
 
     &__header {
       flex: none;
+
+      // An app bar spans the screen; the page width only suits reading content.
+      .x-header__inner {
+        max-width: none;
+      }
     }
 
     &__body {

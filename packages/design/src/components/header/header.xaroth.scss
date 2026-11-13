@@ -118,8 +118,8 @@
     }
   }
 
-  @media (width < 640px) {
-    .x-header {
+  @container x-header (width < 640px) {
+    .x-header__inner {
       --x-header-mark: 1.75rem;
     }
 
