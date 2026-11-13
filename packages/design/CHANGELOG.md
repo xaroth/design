@@ -1,5 +1,22 @@
 # @xaroth.nl/design
 
+## 0.7.0
+
+### Minor Changes
+
+- [#41](https://github.com/xaroth/design/pull/41)
+  [`1683a3e`](https://github.com/xaroth/design/commit/1683a3eb2e164a39aa7b709a894504a7cbb08895) - PageHead takes
+  `compact`, a smaller title and tighter gaps for the top of a panel, and `titleFocusable`, which puts `tabindex="-1"`
+  on the title so a script can move focus to it after a screen change. React also takes `titleRef` for the title
+  element.
+
+### Patch Changes
+
+- [#40](https://github.com/xaroth/design/pull/40)
+  [`02f084c`](https://github.com/xaroth/design/commit/02f084cb8bbe4954bed146ae7ca0eb6592f9c747) - The header folds its
+  nav by its own width instead of the viewport's, so a header in a narrow region folds too. In a workspace the header
+  spans the full width.
+
 ## 0.6.0
 
 ### Minor Changes
