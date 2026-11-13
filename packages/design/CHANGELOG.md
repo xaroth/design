@@ -1,5 +1,26 @@
 # @xaroth.nl/design
 
+## 0.11.0
+
+### Minor Changes
+
+- [#54](https://github.com/xaroth/design/pull/54)
+  [`2926190`](https://github.com/xaroth/design/commit/2926190996581466d281b171ed6c5d942b363b82) - Add EquipmentSlots and
+  EquipmentSlot: named slots that hold an item or show an empty state, with actions, laid out as a grid of cards or a
+  list of rows. With `href` the item, or the empty label, is a link that chooses the slot, marked `aria-current` when
+  `current`.
+
+- [#53](https://github.com/xaroth/design/pull/53)
+  [`15f7178`](https://github.com/xaroth/design/commit/15f71785f76206bac5a4fcbc2f63d6afa361f7b4) - Add ItemCard and
+  ItemName: an item's name, base and mod lines, its name in the rarity's color (ItemName also tells screen readers the
+  rarity), with a quiet mark on lines that do not count. Every theme gets `--x-color-rarity-normal`, `-magic`, `-rare`
+  and `-unique`.
+
+- [#55](https://github.com/xaroth/design/pull/55)
+  [`e65e26d`](https://github.com/xaroth/design/commit/e65e26d222af4021cdeb4e7cd9ff7af1b4abe64a) - Workspace takes `nav`,
+  shown above the main region, such as tabs that switch what it shows while the panel stays, and `scroll`, for a main
+  region that scrolls instead of clipping.
+
 ## 0.10.0
 
 ### Minor Changes
