@@ -1,0 +1,47 @@
+---
+import './hover-card.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { hoverCardClass, hoverCardStyle, type HoverCardOptions } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'div'>, 'class' | 'style' | 'title'> &
+  Omit<HoverCardOptions, 'className'> & {
+    class?: string
+    /** The point, in pixels from the top left corner of the nearest positioned ancestor. */
+    x: number
+    y: number
+    /** Plain-text title; the `title` slot takes markup. */
+    title?: string
+    lines?: readonly string[]
+  }
+
+const { x, y, title, lines = [], class: className, slot: _slot, ...rest } = Astro.props
+const hasTitle = title !== undefined || Astro.slots.has('title')
+---
+
+<div {...rest} class={hoverCardClass({ className })} style={hoverCardStyle(x, y)}>
+  <div class="x-hover-card__card">
+    {
+      hasTitle && (
+        <p class="x-hover-card__title">
+          <slot name="title">{title}</slot>
+        </p>
+      )
+    }
+    {
+      lines.length > 0 && (
+        <ul class="x-hover-card__lines">
+          {lines.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
+      )
+    }
+    {
+      Astro.slots.has('default') && (
+        <div class="x-hover-card__body">
+          <slot />
+        </div>
+      )
+    }
+  </div>
+</div>

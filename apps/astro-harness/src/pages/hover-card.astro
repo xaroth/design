@@ -1,0 +1,27 @@
+---
+import Harness from '../layouts/Harness.astro'
+import { HoverCard } from '@xaroth.nl/design/astro'
+
+const dot = 'position: absolute; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--x-color-accent)'
+const box = 'position: relative; width: 420px; height: 240px; background: var(--x-color-surface); border: 1px dashed var(--x-color-line-strong)'
+const lines = ['+10 to maximum Life', '5% increased maximum Life', 'Regenerate 0.5% of Life per second']
+const points = [
+  { x: 16, y: 16 },
+  { x: 404, y: 16 },
+  { x: 16, y: 224 },
+  { x: 404, y: 224 },
+]
+---
+
+<Harness title="Hover card">
+  {() => (
+    <div style="padding: 32px; display: flex; flex-wrap: wrap; gap: 24px">
+      {points.map(({ x, y }) => (
+        <div style={box}>
+          <span style={`${dot}; left: ${x}px; top: ${y}px`} />
+          <HoverCard x={x} y={y} title="Heart of the Warrior" lines={lines} />
+        </div>
+      ))}
+    </div>
+  )}
+</Harness>
