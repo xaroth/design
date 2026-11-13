@@ -45,7 +45,7 @@ To show several themes on one page (docs, previews), load `@xaroth.nl/design/the
 | --- | --- |
 | `packages/design` | The published package |
 | `apps/storybook` | Storybook (React), every theme, axe checks |
-| `apps/astro-harness` | Astro app; runs the same-HTML test for every part |
+| `apps/astro-harness` | Astro app; a page per part in every theme, checked for valid ids |
 
 ```sh
 pnpm install

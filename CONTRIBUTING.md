@@ -10,20 +10,31 @@ Everything for a part lives in one folder, `packages/design/src/components/<part
 | `<part>.<theme>.scss` | One per theme (`<part>.xaroth.scss`). Theme look: shape, ornament, theme-specific color. Everything inside `@include theme.parts('<theme>') { ... }`. Built into that theme's single stylesheet. |
 | `<name>.astro`        | One file per Astro component, kebab-case (`section-head.astro`). Imports `./<part>.scss` and the recipe.                                                                                         |
 | `<part>.tsx`          | The React components of the folder. Imports `./<part>.scss` and the recipe.                                                                                                                      |
+| `<part>.test.ts`      | Same-HTML test: every meaningful prop combination, Astro vs React, via `expectSameHtml`.                                                                                                         |
+| `index.test.ts`       | Unit tests for recipe logic with real branches or arithmetic.                                                                                                                                    |
 
 Outside the package:
 
-| File                                           | Job                                                                                              |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `apps/astro-harness/test/parts/<part>.test.ts` | Same-HTML test: every meaningful prop combination, Astro vs React, via `expectSameHtml`.         |
-| `apps/astro-harness/src/pages/<part>.astro`    | Harness page, wrapped in `layouts/Harness.astro`, which renders it once per theme.               |
-| `apps/storybook/stories/<Part>.stories.tsx`    | Default story with working controls for every prop, plus `Variants` and `States` matrix stories. |
+| File                                        | Job                                                                                              |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `apps/astro-harness/src/pages/<part>.astro` | Harness page, wrapped in `layouts/Harness.astro`, which renders it once per theme.               |
+| `apps/storybook/stories/<Part>.stories.tsx` | Default story with working controls for every prop, plus `Variants` and `States` matrix stories. |
 
 The theme list lives in `src/config.ts`; scripts, exports, Storybook and the harness read it.
 
 Entry files (`src/parts.ts`, `src/astro.ts`, `src/react.ts`, `src/styles/all.scss`,
 `src/styles/themes/_<theme>-parts.scss`) are generated from the folders: run `pnpm --filter @xaroth.nl/design generate`
 after adding a folder or an `.astro` file. `pnpm test` fails when they are out of date.
+
+## Tests
+
+A test sits beside the file it tests: `src/bem.test.ts` beside `src/bem.ts`, `<part>.test.ts` and `index.test.ts` in the
+part folder. Fixtures a part test renders go in the part's `fixtures/` folder; the build does not publish them.
+`packages/design/test/` holds the same-HTML helpers (`compare.ts`, `normalize.ts`) and checks that span every part.
+`pnpm --filter @xaroth.nl/design test` runs the package's tests with Vitest.
+
+Outside the package, the harness tests what only it has: `apps/astro-harness/test/pages.test.ts` renders every harness
+page and checks ids, and `test/types/parity.test.ts` checks that Astro and React props match, through `astro check`.
 
 ## How sites use it
 
