@@ -1,0 +1,86 @@
+@use '../../styles/layers';
+
+@layer x.core {
+  // Part-local properties (themes may override):
+  //   --x-replacement-from-color  color of what is replaced
+  //   --x-replacement-to-color    color of what it becomes
+  //   --x-replacement-line-color  color of the lines it gives
+  // Size and row padding follow the area's density (x-density-*) when one is set; otherwise the text around it.
+  .x-replacement-list {
+    --x-replacement-from-color: var(--x-color-text-muted);
+    --x-replacement-to-color: var(--x-color-text);
+    --x-replacement-line-color: var(--x-color-text-muted);
+
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    font-size: var(--x-density-fs, 1em);
+    line-height: 1.4;
+    list-style: none;
+  }
+
+  .x-replacement {
+    display: flex;
+    flex-direction: column;
+    gap: var(--x-space-1);
+    min-width: 0;
+    padding-block: var(--x-density-row-gap, var(--x-space-2));
+    border-bottom: 1px solid var(--x-color-line);
+
+    &__head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--x-space-1) var(--x-space-2);
+      align-items: baseline;
+      margin: 0;
+    }
+
+    &__from {
+      min-width: 0;
+      color: var(--x-replacement-from-color);
+      overflow-wrap: anywhere;
+    }
+
+    &__arrow,
+    &__gains {
+      color: var(--x-color-text-faint);
+    }
+
+    &__gains {
+      font-size: var(--x-fs-label);
+      letter-spacing: var(--x-track-label);
+      text-transform: uppercase;
+    }
+
+    &__to {
+      min-width: 0;
+      font-weight: 600;
+      color: var(--x-replacement-to-color);
+      overflow-wrap: anywhere;
+    }
+
+    &__meta {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: var(--x-space-1);
+      margin-inline-start: auto;
+    }
+
+    &__lines {
+      padding: 0;
+      padding-inline-start: var(--x-space-3);
+      margin: 0;
+      color: var(--x-replacement-line-color);
+      list-style: none;
+    }
+
+    // When lines are added, the name stays, so the lines carry the change.
+    &--added &__from {
+      color: var(--x-color-text);
+    }
+
+    &--added &__lines {
+      color: var(--x-replacement-to-color);
+    }
+  }
+}

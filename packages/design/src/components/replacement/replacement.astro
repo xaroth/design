@@ -1,0 +1,63 @@
+---
+import './replacement.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { isEmptyContent } from '../../content.ts'
+import { replacementClass, replacementClasses as c, replacementToLabel } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'li'>, 'class'> & {
+  class?: string
+  /** What is replaced, for example a node's name. The `from` slot takes markup. */
+  from?: string
+  /** What it becomes. Leave out when the lines are added to `from` instead. The `to` slot takes markup. */
+  to?: string
+  /** What it gives after the change. */
+  lines?: readonly string[]
+  /** Spoken in place of the arrow. */
+  toLabel?: string
+  /** Shown after `from` when nothing replaces it. The `gainsLabel` slot takes markup. */
+  gainsLabel?: string
+}
+
+const { from, to, lines = [], toLabel, gainsLabel = 'gains', class: className, slot: _slot, ...rest } = Astro.props
+// Rendered first, so an empty `to` or `meta` slot counts as absent, as false or null does in React.
+const toHtml = Astro.slots.has('to') ? (await Astro.slots.render('to')).trim() : undefined
+const metaHtml = Astro.slots.has('meta') ? (await Astro.slots.render('meta')).trim() : undefined
+const added = isEmptyContent(toHtml) && isEmptyContent(to)
+---
+
+<li {...rest} class={replacementClass({ added, className })}>
+  <p class={c.head}>
+    <span class={c.from}><slot name="from">{from}</slot></span>
+    {
+      added ? (
+        <span class={c.gains}>
+          <slot name="gainsLabel">{gainsLabel}</slot>
+        </span>
+      ) : (
+        <>
+          <span class={c.arrow}>
+            <span aria-hidden="true">→</span>
+            <span class="x-visually-hidden">{replacementToLabel(toLabel)}</span>
+          </span>
+          <span class={c.to}>{isEmptyContent(toHtml) ? to : <Fragment set:html={toHtml} />}</span>
+        </>
+      )
+    }
+    {
+      !isEmptyContent(metaHtml) && (
+        <span class={c.meta}>
+          <Fragment set:html={metaHtml} />
+        </span>
+      )
+    }
+  </p>
+  {
+    lines.length > 0 && (
+      <ul class={c.lines}>
+        {lines.map((line) => (
+          <li>{line}</li>
+        ))}
+      </ul>
+    )
+  }
+</li>

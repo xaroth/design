@@ -1,130 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import {
   Button,
-  DescriptionList,
-  DescriptionListGroup,
-  DescriptionListGroups,
   Dialog,
-  EmptyState,
   EquipmentSlot,
   EquipmentSlots,
   Field,
   Grid,
   ItemCard,
   ItemName,
-  PageHead,
-  Tabs,
   Textarea,
   Workspace,
 } from '@xaroth.nl/design/react'
-import type { ReactNode } from 'react'
 import { equipment, pastedText, type Item } from '../ItemCard/items.ts'
-import { appHeader, screen } from './screens.tsx'
-
-const better = (amount: string) => ({ amount, effect: 'better' as const })
-const worse = (amount: string) => ({ amount, effect: 'worse' as const })
-
-const stats = [
-  {
-    title: 'Attributes',
-    items: [
-      { term: 'Strength', value: '42', change: better('+10') },
-      { term: 'Dexterity', value: '14' },
-      { term: 'Intelligence', value: '14' },
-    ],
-  },
-  {
-    title: 'Offence',
-    items: [
-      { term: 'Total DPS', value: '1,284', change: better('+8.2%') },
-      { term: 'Hit Damage', value: '412' },
-      { term: 'Attack Speed', value: '1.31/s' },
-      { term: 'Crit Chance', value: '5.0%' },
-      { term: 'Accuracy', value: '87%' },
-    ],
-  },
-  {
-    title: 'Defences',
-    items: [
-      { term: 'Life', value: '1,140', change: better('+5') },
-      { term: 'Energy Shield', value: '0' },
-      { term: 'Armour', value: '880' },
-      { term: 'Evasion', value: '312', change: worse('-24') },
-      { term: 'Block Chance', value: '0%' },
-    ],
-  },
-  {
-    title: 'Resistances',
-    items: [
-      { term: 'Fire', value: '-60%' },
-      { term: 'Cold', value: '-60%' },
-      { term: 'Lightning', value: '-60%' },
-      { term: 'Chaos', value: '-60%' },
-    ],
-  },
-]
-
-const tree = (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-  >
-    <circle
-      cx="12"
-      cy="5"
-      r="2"
-    />
-    <circle
-      cx="5"
-      cy="19"
-      r="2"
-    />
-    <circle
-      cx="19"
-      cy="19"
-      r="2"
-    />
-    <path d="M11 7 6 17M13 7l5 10M7 19h10" />
-  </svg>
-)
-
-const panel = (
-  <div className="x-p-md x-density-compact">
-    <PageHead
-      compact
-      titleFocusable
-      title="Marauder"
-      lead="Level 1, 12 points left"
-    />
-    <DescriptionListGroups>
-      {stats.map((group) => (
-        <DescriptionListGroup
-          key={group.title}
-          title={group.title}
-          level={2}
-        >
-          <DescriptionList
-            layout="inline"
-            striped
-            items={group.items}
-          />
-        </DescriptionListGroup>
-      ))}
-    </DescriptionListGroups>
-  </div>
-)
-
-const placeholder = (title: string, text: string, icon?: ReactNode) => (
-  <EmptyState
-    icon={icon}
-    title={title}
-    headingLevel={2}
-  >
-    {text}
-  </EmptyState>
-)
+import { appHeader, equipped, panel, placeholder, screen, TabbedBuild, tree } from './screens.tsx'
 
 function Build() {
   return (
@@ -134,36 +22,6 @@ function Build() {
       panelLabel="Stats"
     >
       {placeholder('Passive tree', 'The tree is drawn here.', tree)}
-    </Workspace>
-  )
-}
-
-type View = 'tree' | 'items' | 'skills'
-
-const equipped = equipment.filter((e) => e.item).length
-
-const views = (current: View) => (
-  <Tabs
-    label="Build views"
-    items={[
-      { label: 'Tree', href: '#tree', current: current === 'tree' },
-      { label: 'Items', href: '#items', current: current === 'items', count: `${equipped}/${equipment.length}` },
-      { label: 'Skills', href: '#skills', current: current === 'skills' },
-    ]}
-  />
-)
-
-// The tabs switch the main region; the header and the stats panel stay.
-function TabbedBuild({ view, children }: { view: View; children: ReactNode }) {
-  return (
-    <Workspace
-      header={appHeader('build')}
-      nav={views(view)}
-      scroll={view === 'items'}
-      panel={panel}
-      panelLabel="Stats"
-    >
-      {children}
     </Workspace>
   )
 }

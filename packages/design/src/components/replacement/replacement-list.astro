@@ -1,0 +1,11 @@
+---
+import './replacement.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { replacementListClass } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'ul'>, 'class'> & { class?: string }
+
+const { class: className, slot: _slot, ...rest } = Astro.props
+---
+
+<ul {...rest} class={replacementListClass({ className })}><slot /></ul>

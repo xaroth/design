@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-replacement__to {
+    font-family: var(--x-font-ui);
+  }
+}

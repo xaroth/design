@@ -1,0 +1,17 @@
+---
+import Harness from '../layouts/Harness.astro'
+import { Replacement, ReplacementList, Tag } from '@xaroth.nl/design/astro'
+---
+
+<Harness title="Replacement">
+  {() => (
+    <div style="padding: 32px; max-width: 420px">
+      <ReplacementList aria-label="Nodes in radius">
+        <Replacement from="Heart of Oak" to="Ritual of Might" lines={['20% increased Melee Damage']}>
+          <Tag slot="meta">Allocated</Tag>
+        </Replacement>
+        <Replacement from="Strength" lines={['+4% to Chaos Resistance']} />
+      </ReplacementList>
+    </div>
+  )}
+</Harness>

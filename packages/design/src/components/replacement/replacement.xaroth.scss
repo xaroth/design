@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('xaroth') {
+  .x-replacement__to {
+    font-family: var(--x-font-heading);
+  }
+}
