@@ -1,4 +1,5 @@
 import { bem } from '../../bem.ts'
+import { isEmptyContent } from '../../content.ts'
 
 // grid: a card per slot, for showing every item in full. list: a row per slot, for picking one to show elsewhere.
 export type EquipmentSlotsLayout = 'grid' | 'list'
@@ -39,6 +40,4 @@ export const equipmentSlotLinkAttrs = (href: string, current?: boolean) => ({
   ...(current && { 'aria-current': 'true' as const }),
 })
 
-// React renders nothing for these, so a slot given `{item && <ItemCard />}` without an item is empty.
-export const isEmptySlotContent = (content: unknown): boolean =>
-  content == null || typeof content === 'boolean' || content === ''
+export const isEmptySlotContent = isEmptyContent

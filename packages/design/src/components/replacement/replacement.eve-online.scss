@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('eve-online') {
+  .x-replacement__to {
+    font-family: var(--x-font-heading);
+  }
+}
