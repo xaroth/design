@@ -5,6 +5,7 @@ import {
   itemCardClasses as c,
   itemCardShowsBase,
   itemNameClass,
+  itemNameRarityText,
   itemModClass,
   itemModLine,
   itemModNote,
@@ -96,11 +97,14 @@ export function ItemCard({
 
 export type ItemNameProps = Omit<ItemCardOptions, 'className'> & HTMLAttributes<HTMLSpanElement>
 
-export function ItemName({ rarity, className, ...rest }: ItemNameProps) {
+export function ItemName({ rarity, className, children, ...rest }: ItemNameProps) {
   return (
     <span
       {...rest}
       className={itemNameClass({ rarity, className })}
-    />
+    >
+      {children}
+      <span className="x-visually-hidden">{itemNameRarityText(rarity)}</span>
+    </span>
   )
 }

@@ -46,6 +46,9 @@ export const itemCardShowsBase = (name: string, base?: string): base is string =
 
 const name = bem('x-item-name', { defaults: { rarity: 'normal' } })
 
+// Read after the name, as the color alone does not tell the rarity. Leading comma so it does not run into the name.
+export const itemNameRarityText = (rarity: ItemRarity = 'normal'): string => `, ${itemRarityLabels[rarity]}`
+
 // The name alone in its rarity color, for rows and links outside a card.
 export const itemNameClass = ({ rarity = 'normal', className }: ItemCardOptions = {}): string =>
   name({ rarity }, className)
