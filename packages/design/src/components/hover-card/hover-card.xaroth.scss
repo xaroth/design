@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('xaroth') {
+  .x-hover-card {
+    --x-hover-card-edge-color: var(--x-color-surface-3);
+  }
+}

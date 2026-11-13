@@ -1,0 +1,77 @@
+@use '../../styles/layers';
+
+// The card goes below and to the right of the point, flips to the other side of the point on an axis where it does
+// not fit, and is clamped inside the container when neither side fits. All in CSS: translate percentages are the
+// card's own size and cq units the layer's, so one clamp() can compare them.
+@mixin place($axis, $point, $size) {
+  // Positive when the card fits after the point.
+  $room: calc(#{$size} - var(--x-hover-card-inset) - var(#{$point}) - var(--x-hover-card-gap) - 100%);
+
+  // A step from the gap to the flipped offset; the factor turns any room of 1px or more into the full step.
+  $side: clamp(calc(-100% - var(--x-hover-card-gap)), calc((#{$room} + 1px) * 1000), var(--x-hover-card-gap));
+
+  --x-hover-card-#{$axis}: clamp(
+    calc(var(--x-hover-card-inset) - var(#{$point})),
+    #{$side},
+    calc(#{$size} - var(--x-hover-card-inset) - var(#{$point}) - 100%)
+  );
+}
+
+@layer x.core {
+  // A layer over the positioned container. It passes the pointer through, so the content under it keeps its hover.
+  .x-hover-card {
+    --x-hover-card-gap: 12px;
+    --x-hover-card-inset: 8px;
+    --x-hover-card-bg: var(--x-color-surface-3);
+    --x-hover-card-edge-color: transparent;
+
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    overflow: hidden;
+    pointer-events: none;
+    container-type: size;
+
+    &__card {
+      @include place('tx', '--x-hover-card-x', 100cqw);
+      @include place('ty', '--x-hover-card-y', 100cqh);
+
+      position: absolute;
+      top: var(--x-hover-card-y, 0);
+      left: var(--x-hover-card-x, 0);
+      display: flex;
+      flex-direction: column;
+      gap: var(--x-space-2);
+      box-sizing: border-box;
+      width: max-content;
+      max-width: min(var(--x-hover-card-max, 22rem), 100cqw - 2 * var(--x-hover-card-inset));
+      padding: var(--x-space-3);
+      font-family: var(--x-font-ui);
+      font-size: var(--x-fs-small);
+      line-height: 1.45;
+      color: var(--x-color-text);
+      background: var(--x-hover-card-bg);
+      border: 1px solid var(--x-hover-card-edge-color);
+      border-radius: var(--x-radius);
+      box-shadow: var(--x-shadow);
+      translate: var(--x-hover-card-tx) var(--x-hover-card-ty);
+    }
+
+    &__title {
+      margin: 0;
+      font-size: var(--x-fs-ui);
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    &__lines {
+      display: flex;
+      flex-direction: column;
+      gap: var(--x-space-1);
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      color: var(--x-color-text-muted);
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('eve-online') {
+  .x-hover-card {
+    --x-hover-card-edge-color: var(--x-color-line-strong);
+  }
+}
