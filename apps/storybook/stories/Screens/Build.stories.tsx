@@ -248,10 +248,8 @@ const pasteDialog = (slot: string) => (
   </Dialog>
 )
 
-// The alternative: slots as rows, the chosen slot's item in full beside them.
-const current = 'Amulet'
-
-const itemsListDetail = (() => {
+// The alternative: slots as rows, the chosen slot's item in full beside them. Empty slots can be chosen too.
+const itemsListDetail = (current: string) => {
   const chosen = equipment.find((e) => e.slot === current)?.item
   return (
     <div className="x-p-md x-stack-md">
@@ -267,13 +265,10 @@ const itemsListDetail = (() => {
               <EquipmentSlot
                 key={slot}
                 label={slot}
+                href={`#${slot}`}
                 current={slot === current}
               >
-                {item && (
-                  <a href={`#${slot}`}>
-                    <ItemName rarity={item.rarity}>{item.name}</ItemName>
-                  </a>
-                )}
+                {item && <ItemName rarity={item.rarity}>{item.name}</ItemName>}
               </EquipmentSlot>
             ))}
           </EquipmentSlots>
@@ -296,7 +291,7 @@ const itemsListDetail = (() => {
       </Grid>
     </div>
   )
-})()
+}
 
 const meta = {
   title: 'Screens/Build',
@@ -339,5 +334,10 @@ export const SkillsTab: StoryObj<typeof meta> = {
 
 export const ItemsListDetail: StoryObj<typeof meta> = {
   name: 'Alternative: items as list and detail',
-  render: () => <TabbedBuild view="items">{itemsListDetail}</TabbedBuild>,
+  render: () => <TabbedBuild view="items">{itemsListDetail('Amulet')}</TabbedBuild>,
+}
+
+export const ItemsListDetailEmpty: StoryObj<typeof meta> = {
+  name: 'Alternative: items as list and detail, empty slot',
+  render: () => <TabbedBuild view="items">{itemsListDetail('Ring 2')}</TabbedBuild>,
 }
