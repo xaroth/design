@@ -1,0 +1,23 @@
+---
+import Harness from '../layouts/Harness.astro'
+import { StatChange, StatChangeList } from '@xaroth.nl/design/astro'
+
+const rows = [
+  { name: 'Life', from: '1,140', to: '1,180', effect: 'better' },
+  { name: 'Mana Cost', from: '6', to: '8', effect: 'worse' },
+  { name: 'Evasion', from: '312', to: '288', effect: 'worse' },
+  { name: 'Light Radius', from: '100%', to: '110%', effect: 'neutral' },
+] as const
+---
+
+<Harness title="Stat change">
+  {() => (
+    <div style="padding: 32px; max-width: 360px">
+      <StatChangeList aria-label="Changes">
+        {rows.map((row) => (
+          <StatChange {...row} />
+        ))}
+      </StatChangeList>
+    </div>
+  )}
+</Harness>
