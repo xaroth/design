@@ -1,5 +1,13 @@
 # @xaroth.nl/design
 
+## 0.8.0
+
+### Minor Changes
+
+- [#44](https://github.com/xaroth/design/pull/44)
+  [`f96767b`](https://github.com/xaroth/design/commit/f96767be509892903f7220e15d665f5b4f2b3e9e) - Add a pbt favicon:
+  `favicon/pbt.svg`, a `favicon/pbt.ico` fallback (16, 32 and 48 px) and a 180 px touch icon `favicon/pbt-180.png`.
+
 ## 0.7.0
 
 ### Minor Changes
