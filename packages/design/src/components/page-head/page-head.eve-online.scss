@@ -17,6 +17,10 @@
       box-shadow: 0 0 8px var(--x-color-glow);
     }
 
+    &--compact {
+      padding-bottom: var(--x-space-3);
+    }
+
     &--center::after {
       left: calc(50% - 48px);
     }

@@ -59,6 +59,8 @@ const meta = {
     actions: 'two' as never,
     level: 1,
     align: 'start',
+    compact: false,
+    titleFocusable: false,
   },
   argTypes: {
     breadcrumbs: { control: 'inline-radio', options: Object.keys(crumbs), mapping: crumbs },
@@ -70,6 +72,8 @@ const meta = {
     level: { control: 'inline-radio', options: [1, 2] },
     align: { control: 'inline-radio', options: ['start', 'center'] },
     titleId: { control: 'text' },
+    compact: { control: 'boolean' },
+    titleFocusable: { control: 'boolean' },
   },
   render: (args) => (
     <Container
@@ -148,6 +152,27 @@ export const Variants: StoryObj<typeof meta> = {
           stack
         >
           <PageHead title="About" />
+        </Row>
+        <Row
+          label="Compact, every slot"
+          stack
+        >
+          <PageHead
+            {...full}
+            compact
+            level={2}
+          />
+        </Row>
+        <Row
+          label="Compact, title and lead"
+          stack
+        >
+          <PageHead
+            compact
+            level={2}
+            title="Marauder"
+            lead="Level 1, 12 points left"
+          />
         </Row>
       </Rows>
     </Container>

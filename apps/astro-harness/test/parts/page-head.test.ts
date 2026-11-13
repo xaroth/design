@@ -58,6 +58,9 @@ const cases: { name: string; props: Record<string, unknown>; slots?: Partial<Rec
     props: { title: 'Tools', eyebrow: 'Index', lead: 'Six tools.', align: 'center', level: 2 },
     slots: { breadcrumbs, meta, actions },
   },
+  { name: 'compact', props: { title: 'Marauder', lead: 'Level 1', compact: true } },
+  { name: 'focusable title', props: { title: 'Marauder', titleFocusable: true, titleId: 'panel-title' } },
+  { name: 'title not focusable is the default', props: { title: 'Tools', titleFocusable: false } },
   { name: 'extra class and attrs', props: { title: 'Tools', class: 'site-head', id: 'top', 'data-x': '1' } },
 ]
 
