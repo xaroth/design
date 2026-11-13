@@ -2,11 +2,13 @@
 
 @layer x.core {
   // The bar folds its nav into a <details> menu below 860px, so no script is needed. Actions stay in the bar,
-  // rendered once, so ids inside them stay unique.
+  // rendered once, so ids inside them stay unique. The fold reads the bar's own width, so a bar in a narrow region
+  // folds too.
   .x-header {
     --x-header-height: 72px;
     --x-header-bg: transparent;
 
+    container: x-header / inline-size;
     position: relative;
     z-index: 50;
     background: var(--x-header-bg);
@@ -173,7 +175,7 @@
       }
     }
 
-    @media (width < 860px) {
+    @container x-header (width < 860px) {
       .x-header__nav {
         display: none;
       }

@@ -153,6 +153,21 @@ export const Variants: StoryObj<typeof meta> = {
           />
         </Row>
         <Row
+          label="In a 480 px region: the nav folds by the bar's own width, at any viewport"
+          stack
+          inset
+        >
+          <div style={{ width: 480, outline: '1px dashed currentColor' }}>
+            <Header
+              brand={brands['eve-online']}
+              brandHref="#"
+              items={nav('Home')}
+              actions={actions['sign in']}
+              navLabel="Main, narrow region"
+            />
+          </div>
+        </Row>
+        <Row
           label="Brand and actions, no nav"
           stack
           inset
