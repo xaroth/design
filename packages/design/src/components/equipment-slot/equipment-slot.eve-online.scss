@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('eve-online') {
+  .x-equipment-slot__label {
+    font-weight: 500;
+  }
+}

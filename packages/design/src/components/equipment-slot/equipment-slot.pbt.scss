@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-equipment-slot__label {
+    font-weight: 600;
+  }
+}

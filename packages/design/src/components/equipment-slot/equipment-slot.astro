@@ -1,0 +1,49 @@
+---
+import './equipment-slot.scss'
+import type { HTMLAttributes } from 'astro/types'
+import {
+  equipmentSlotAttrs,
+  equipmentSlotClass,
+  equipmentSlotClasses as c,
+  type EquipmentSlotHeadingLevel,
+} from './index.ts'
+
+type Props = Omit<HTMLAttributes<'li'>, 'class'> & {
+  class?: string
+  /** The slot's name, for example "Helmet". The `label` slot takes markup. */
+  label?: string
+  headingLevel?: EquipmentSlotHeadingLevel
+  /** The slot is the one shown elsewhere, as in a list beside a detail view. */
+  current?: boolean
+  /** Shown when the slot has no item. The `emptyLabel` slot takes markup. */
+  emptyLabel?: string
+}
+
+const { label, headingLevel = 3, current, emptyLabel = 'Empty', class: className, slot: _slot, ...rest } = Astro.props
+const Heading = `h${headingLevel}` as const
+const empty = !Astro.slots.has('default')
+---
+
+<li {...rest} {...equipmentSlotAttrs(current)} class={equipmentSlotClass({ empty, current, className })}>
+  <div class={c.head}>
+    <Heading class={c.label}><slot name="label">{label}</slot></Heading>
+    {
+      Astro.slots.has('actions') && (
+        <div class={c.actions}>
+          <slot name="actions" />
+        </div>
+      )
+    }
+  </div>
+  <div class={c.body}>
+    {
+      empty ? (
+        <p class={c.empty}>
+          <slot name="emptyLabel">{emptyLabel}</slot>
+        </p>
+      ) : (
+        <slot />
+      )
+    }
+  </div>
+</li>
