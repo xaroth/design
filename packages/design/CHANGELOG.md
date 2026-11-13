@@ -1,5 +1,14 @@
 # @xaroth.nl/design
 
+## 0.12.0
+
+### Minor Changes
+
+- [#58](https://github.com/xaroth/design/pull/58)
+  [`393ad0f`](https://github.com/xaroth/design/commit/393ad0fe75dfb9cc173f96f378e0f07b3d7640e9) - Add `ReplacementList`
+  and `Replacement`: what each entry becomes, or the lines it gains when nothing replaces it, with room for marks such
+  as tags. Empty `to` and `meta` content counts as absent, in React and Astro.
+
 ## 0.11.0
 
 ### Minor Changes
