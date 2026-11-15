@@ -1,0 +1,107 @@
+@use '../../styles/layers';
+
+@layer x.core {
+  // Below 720px the fields move above the navigation and take the full width. The fold reads the bar's own width, so
+  // a bar in a narrow region folds too. Fields come after the navigation in the source, so focus order matches the
+  // wide layout.
+  // Part-local properties: --x-bar-bg, --x-bar-line (the lines under the bar and the fields), --x-bar-width (the
+  // content width, matched to the header's).
+  .x-bar {
+    --x-bar-bg: transparent;
+    --x-bar-line: var(--x-color-line);
+    --x-bar-width: var(--x-page);
+    --x-bar-inset: max(var(--x-gutter), (100% - var(--x-bar-width)) / 2);
+
+    container: x-bar / inline-size;
+    background: var(--x-bar-bg);
+    border-bottom: 1px solid var(--x-bar-line);
+
+    &__inner {
+      display: flex;
+      gap: var(--x-space-5);
+      align-items: stretch;
+      justify-content: space-between;
+      padding-inline: var(--x-bar-inset);
+    }
+
+    &__start {
+      display: flex;
+      flex: none;
+      align-items: stretch;
+      max-width: 100%;
+      min-width: 0;
+
+      // The bar draws the line; the current tab's marker sits on it.
+      .x-tabs {
+        display: flex;
+      }
+
+      .x-tabs__list {
+        border-bottom: 0;
+      }
+    }
+
+    &__end {
+      display: flex;
+      flex: 1 1 auto;
+      flex-wrap: wrap;
+      gap: var(--x-space-2);
+      align-items: center;
+      justify-content: flex-end;
+      min-width: 0;
+      padding-block: var(--x-space-2);
+
+      > .x-input,
+      > .x-input-wrap,
+      > .x-select {
+        width: auto;
+      }
+    }
+
+    // Kept in the page when empty: a live region that is added later is often not announced.
+    &__notice {
+      font-family: var(--x-font-ui);
+      font-size: var(--x-fs-small);
+      line-height: 1.4;
+
+      &:not(:empty) {
+        padding: var(--x-space-2) var(--x-bar-inset);
+        background: var(--x-bar-notice-bg, var(--x-color-warning-wash));
+        border-top: 1px solid var(--x-bar-line);
+        box-shadow: inset 2px 0 0 var(--x-color-warning);
+      }
+    }
+
+    @container x-bar (width < 720px) {
+      &__inner {
+        flex-direction: column;
+        gap: 0;
+        padding-inline: 0;
+      }
+
+      &__start {
+        padding-inline: var(--x-gutter);
+      }
+
+      &__end {
+        order: -1;
+        justify-content: flex-start;
+        padding: var(--x-space-3) var(--x-gutter);
+
+        > * {
+          flex: 1 1 auto;
+        }
+
+        > .x-input,
+        > .x-input-wrap,
+        > .x-select {
+          min-width: 0;
+        }
+      }
+
+      &__start + &__end {
+        border-bottom: 1px solid var(--x-bar-line);
+      }
+    }
+  }
+}

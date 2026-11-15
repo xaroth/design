@@ -1,0 +1,33 @@
+---
+import './bar.scss'
+import type { HTMLAttributes } from 'astro/types'
+import { barClass, barClasses as c, barNoticeAttrs, type BarOptions } from './index.ts'
+
+type Props = Omit<HTMLAttributes<'div'>, 'class'> &
+  Omit<BarOptions, 'className'> & {
+    class?: string
+  }
+
+const { class: className, slot: _slot, ...rest } = Astro.props
+const notice = Astro.slots.has('notice') ? await Astro.slots.render('notice') : ''
+---
+
+<div {...rest} class={barClass({ className })}>
+  <div class={c.inner}>
+    {
+      Astro.slots.has('start') && (
+        <div class={c.start}>
+          <slot name="start" />
+        </div>
+      )
+    }
+    {
+      Astro.slots.has('end') && (
+        <div class={c.end}>
+          <slot name="end" />
+        </div>
+      )
+    }
+  </div>
+  <div class={c.notice} {...barNoticeAttrs} set:html={notice} />
+</div>

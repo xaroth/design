@@ -1,0 +1,8 @@
+@use '../../styles/theme';
+
+@include theme.parts('eve-online') {
+  .x-bar {
+    --x-bar-bg: color-mix(in oklab, var(--x-color-bg) 88%, transparent);
+    --x-bar-notice-bg: linear-gradient(90deg, var(--x-color-warning-wash), transparent 80%);
+  }
+}

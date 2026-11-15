@@ -1,10 +1,15 @@
 import {
+  Bar,
+  Button,
   DescriptionList,
   DescriptionListGroup,
   DescriptionListGroups,
   EmptyState,
+  Field,
   Header,
+  Input,
   PageHead,
+  Select,
   Tabs,
   Workspace,
 } from '@xaroth.nl/design/react'
@@ -25,6 +30,90 @@ export const appHeader = (current?: string) => (
       { label: 'New build', href: '#new', current: current === 'new' },
       { label: 'Build', href: '#build', current: current === 'build' },
     ]}
+  />
+)
+
+// The app header of the build screen: the app's own actions, no navigation.
+export const buildHeader = (
+  <Header
+    brand={<span>pbt</span>}
+    brandHref="#"
+    actions={
+      <>
+        {['Export', 'Import', 'New build'].map((label) => (
+          <Button
+            key={label}
+            variant="secondary"
+            size="sm"
+          >
+            {label}
+          </Button>
+        ))}
+      </>
+    }
+  />
+)
+
+export const resetNotice = 'Changing the ascendancy resets the 6 points spent on Deadeye.'
+
+// The bar under the header: the build's views and the fields that define the build. `id` keeps ids unique when a
+// page shows more than one.
+export const buildBar = ({ notice, id = 'build' }: { notice?: string; id?: string } = {}) => (
+  <Bar
+    start={
+      <Tabs
+        label="Build views"
+        items={[
+          { label: 'Tree', href: '#tree', current: true },
+          { label: 'Items', href: '#items', count: 9 },
+          { label: 'Config', href: '#config' },
+        ]}
+      />
+    }
+    end={
+      <>
+        <Input
+          aria-label="Build name"
+          defaultValue="Lightning Arrow league start"
+          size={22}
+        />
+        <Field
+          id={`${id}-level`}
+          label="Level"
+          layout="inline"
+        >
+          <Input
+            type="number"
+            min={1}
+            max={100}
+            defaultValue={92}
+            size={4}
+          />
+        </Field>
+        <Select
+          aria-label="Class"
+          defaultValue="ranger"
+        >
+          <option value="ranger">Ranger</option>
+          <option value="duelist">Duelist</option>
+        </Select>
+        <Select
+          aria-label="Ascendancy"
+          defaultValue="deadeye"
+        >
+          <option value="">No Ascendancy</option>
+          <option value="deadeye">Deadeye</option>
+          <option value="pathfinder">Pathfinder</option>
+        </Select>
+        <Select
+          aria-label="Bloodline"
+          defaultValue=""
+        >
+          <option value="">No Bloodline</option>
+        </Select>
+      </>
+    }
+    notice={notice}
   />
 )
 
