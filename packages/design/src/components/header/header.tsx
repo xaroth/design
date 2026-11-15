@@ -19,8 +19,15 @@ export type HeaderProps = Omit<HTMLAttributes<HTMLElement>, 'children'> &
     /** Accessible name for the brand link, when the visible text is not enough. Ignored without `brandHref`. */
     brandLabel?: string
     items?: HeaderNavItem[]
+    /**
+     * Form fields between the brand and the actions. When the bar is too narrow for them, they move as a group to
+     * full-width lines under the bar.
+     */
+    fields?: ReactNode
     /** Shown at the end of the bar, for example a sign in button. Stays in the bar at every width. */
     actions?: ReactNode
+    /** One short message under the bar, announced politely. */
+    notice?: ReactNode
     navLabel?: string
     menuLabel?: string
   }
@@ -33,7 +40,9 @@ export function Header({
   brandHref,
   brandLabel,
   items = [],
+  fields,
   actions,
+  notice,
   navLabel = 'Main',
   menuLabel = 'Menu',
   ...rest
@@ -78,6 +87,7 @@ export function Header({
             {list}
           </nav>
         )}
+        {fields != null && <div className={c.fields}>{fields}</div>}
         {actions != null && <div className={c.actions}>{actions}</div>}
         {items.length > 0 && (
           <details className={c.menu}>
@@ -90,6 +100,14 @@ export function Header({
           </details>
         )}
       </div>
+      {notice != null && (
+        <div
+          className={c.notice}
+          role="status"
+        >
+          {notice}
+        </div>
+      )}
     </header>
   )
 }

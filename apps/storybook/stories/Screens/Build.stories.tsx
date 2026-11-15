@@ -12,12 +12,12 @@ import {
   Workspace,
 } from '@xaroth.nl/design/react'
 import { equipment, pastedText, type Item } from '../ItemCard/items.ts'
-import { appHeader, equipped, panel, placeholder, screen, TabbedBuild, tree } from './screens.tsx'
+import { appHeader, buildFields, equipped, panel, placeholder, screen, TabbedBuild, tree } from './screens.tsx'
 
 function Build() {
   return (
     <Workspace
-      header={appHeader('build')}
+      header={appHeader('build', buildFields)}
       panel={panel}
       panelLabel="Stats"
     >

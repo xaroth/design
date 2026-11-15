@@ -3,8 +3,11 @@ import {
   DescriptionListGroup,
   DescriptionListGroups,
   EmptyState,
+  Field,
   Header,
+  Input,
   PageHead,
+  Select,
   Tabs,
   Workspace,
 } from '@xaroth.nl/design/react'
@@ -17,7 +20,7 @@ export const screen = {
   globals: { theme: 'pbt' },
 }
 
-export const appHeader = (current?: string) => (
+export const appHeader = (current?: string, fields?: ReactNode) => (
   <Header
     brand={<span>pbt</span>}
     brandHref="#"
@@ -25,7 +28,58 @@ export const appHeader = (current?: string) => (
       { label: 'New build', href: '#new', current: current === 'new' },
       { label: 'Build', href: '#build', current: current === 'build' },
     ]}
+    fields={fields}
   />
+)
+
+// What the stats are worked out for. Changing one recalculates the panel.
+export const buildFields = (
+  <>
+    <Field
+      id="build-name"
+      label="Build"
+      layout="inline"
+    >
+      <Input
+        defaultValue="Untitled build"
+        size={14}
+      />
+    </Field>
+    <Field
+      id="build-class"
+      label="Class"
+      layout="inline"
+    >
+      <Select defaultValue="Marauder">
+        <option>Marauder</option>
+        <option>Witch</option>
+        <option>Ranger</option>
+      </Select>
+    </Field>
+    <Field
+      id="build-ascendancy"
+      label="Ascendancy"
+      layout="inline"
+    >
+      <Select defaultValue="None">
+        <option>None</option>
+        <option>Juggernaut</option>
+        <option>Berserker</option>
+        <option>Chieftain</option>
+      </Select>
+    </Field>
+    <Field
+      id="build-level"
+      label="Level"
+      layout="inline"
+    >
+      <Select defaultValue="1">
+        <option>1</option>
+        <option>90</option>
+        <option>100</option>
+      </Select>
+    </Field>
+  </>
 )
 
 const better = (amount: string) => ({ amount, effect: 'better' as const })
@@ -161,7 +215,7 @@ export function TabbedBuild({
 }) {
   return (
     <Workspace
-      header={appHeader('build')}
+      header={appHeader('build', buildFields)}
       nav={views(view)}
       scroll={scroll}
       panel={panel}

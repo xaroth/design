@@ -35,7 +35,9 @@ const {
   ...rest
 } = Astro.props
 const { tag: Brand, attrs: brand } = brandState(brandHref, brandLabel)
+const fields = Astro.slots.has('fields') ? await Astro.slots.render('fields') : undefined
 const actions = Astro.slots.has('actions') ? await Astro.slots.render('actions') : undefined
+const notice = Astro.slots.has('notice') ? await Astro.slots.render('notice') : undefined
 ---
 
 <header {...rest} class={headerClass({ layout, sticky, className })}>
@@ -62,6 +64,7 @@ const actions = Astro.slots.has('actions') ? await Astro.slots.render('actions')
         </nav>
       )
     }
+    {fields && <div class={c.fields} set:html={fields} />}
     {actions && <div class={c.actions} set:html={actions} />}
     {
       items.length > 0 && (
@@ -86,4 +89,5 @@ const actions = Astro.slots.has('actions') ? await Astro.slots.render('actions')
       )
     }
   </div>
+  {notice && <div class={c.notice} role="status" set:html={notice} />}
 </header>

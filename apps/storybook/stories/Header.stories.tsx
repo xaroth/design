@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Button, Header } from '@xaroth.nl/design/react'
+import { Button, Field, Header, Input, Select } from '@xaroth.nl/design/react'
 import { matrix, Row, Rows } from './shared.tsx'
 
 const brands = {
@@ -202,6 +202,119 @@ export const States: StoryObj<typeof meta> = {
               items={nav(current)}
               navLabel={`Main, current ${current ?? 'none'}`}
             />
+          </Row>
+        ))}
+      </Rows>
+    </div>
+  ),
+}
+
+// A text field and three selects, as a build page has them. Ids get a prefix so several headers can share a story.
+const buildFields = (prefix: string) => (
+  <>
+    <Field
+      id={`${prefix}-name`}
+      label="Build"
+      layout="inline"
+    >
+      <Input
+        defaultValue="Righteous Fire"
+        size={14}
+      />
+    </Field>
+    <Field
+      id={`${prefix}-class`}
+      label="Class"
+      layout="inline"
+    >
+      <Select defaultValue="Marauder">
+        <option>Marauder</option>
+        <option>Witch</option>
+        <option>Ranger</option>
+      </Select>
+    </Field>
+    <Field
+      id={`${prefix}-ascendancy`}
+      label="Ascendancy"
+      layout="inline"
+    >
+      <Select defaultValue="Juggernaut">
+        <option>None</option>
+        <option>Juggernaut</option>
+        <option>Berserker</option>
+        <option>Chieftain</option>
+      </Select>
+    </Field>
+    <Field
+      id={`${prefix}-level`}
+      label="Level"
+      layout="inline"
+    >
+      <Select defaultValue="90">
+        <option>1</option>
+        <option>90</option>
+        <option>100</option>
+      </Select>
+    </Field>
+  </>
+)
+
+const notice = 'Stats are worked out for level 90.'
+
+const withFields = (prefix: string, withNotice: boolean) => (
+  <Header
+    brand={brands.text}
+    brandHref="#"
+    fields={buildFields(prefix)}
+    actions={actions['sign in']}
+    notice={withNotice ? notice : undefined}
+  />
+)
+
+// At desktop width the fields sit on the bar between the brand and the actions. Screens/Build adds a nav.
+export const Fields: StoryObj<typeof meta> = {
+  tags: ['phone'],
+  parameters: { ...matrix, layout: 'fullscreen' },
+  render: () => (
+    <div className="x-py-xl">
+      <Rows>
+        <Row
+          label="Fields on the bar"
+          stack
+          inset
+        >
+          {withFields('wide', false)}
+        </Row>
+        <Row
+          label="Fields on the bar, with a notice"
+          stack
+          inset
+        >
+          {withFields('wide-notice', true)}
+        </Row>
+      </Rows>
+    </div>
+  ),
+}
+
+// The bar is too narrow for the fields, so they move as a group to lines under it. Brand and actions stay.
+export const FieldsNarrow: StoryObj<typeof meta> = {
+  name: 'Fields, 390 px',
+  tags: ['phone'],
+  parameters: { ...matrix, layout: 'fullscreen' },
+  render: () => (
+    <div className="x-py-xl">
+      <Rows>
+        {[false, true].map((withNotice) => (
+          <Row
+            key={String(withNotice)}
+            label={withNotice ? 'In a 390 px region, with a notice' : 'In a 390 px region'}
+            stack
+            inset
+          >
+            <div style={{ width: 390, maxWidth: '100%', outline: '1px dashed currentColor' }}>
+              {withFields(withNotice ? 'narrow-notice' : 'narrow', withNotice)}
+            </div>
           </Row>
         ))}
       </Rows>

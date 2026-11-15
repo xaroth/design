@@ -3,7 +3,7 @@
 @layer x.core {
   // The bar folds its nav into a <details> menu below 860px, so no script is needed. Actions stay in the bar,
   // rendered once, so ids inside them stay unique. The fold reads the bar's own width, so a bar in a narrow region
-  // folds too.
+  // folds too. Fields move as a group to lines under the bar below 1200px; nothing goes behind the menu.
   .x-header {
     --x-header-height: 72px;
     --x-header-bg: transparent;
@@ -72,6 +72,25 @@
       white-space: nowrap;
     }
 
+    &__fields {
+      display: flex;
+      flex: 0 1 auto;
+      flex-wrap: wrap;
+      gap: var(--x-space-2) var(--x-space-4);
+      align-items: center;
+      min-width: 0;
+    }
+
+    &__notice {
+      width: 100%;
+      max-width: calc(var(--x-page) + 2 * var(--x-gutter));
+      padding: var(--x-space-2) var(--x-gutter) var(--x-space-3);
+      margin-inline: auto;
+      font-size: var(--x-fs-small);
+      line-height: 1.4;
+      color: var(--x-color-text-muted);
+    }
+
     &__actions {
       display: flex;
       flex: none;
@@ -103,14 +122,27 @@
 
     &--inline {
       .x-header__inner {
+        --x-header-gap: var(--x-space-5);
+
         display: flex;
-        gap: var(--x-space-5);
+        gap: var(--x-header-gap);
         align-items: center;
         height: var(--x-header-height);
       }
 
-      .x-header__nav {
+      .x-header__nav,
+      .x-header__fields {
         margin-left: auto;
+      }
+
+      .x-header__nav + .x-header__fields {
+        margin-left: 0;
+      }
+
+      // Fields that still do not fit wrap inside the bar, which grows, rather than scroll the page sideways.
+      .x-header__inner:has(> .x-header__fields) {
+        height: auto;
+        min-height: var(--x-header-height);
       }
 
       .x-header__list {
@@ -156,6 +188,12 @@
         grid-area: nav;
       }
 
+      .x-header__fields {
+        grid-column: 1 / -1;
+        justify-content: center;
+        padding-bottom: var(--x-space-4);
+      }
+
       .x-header__list {
         flex-wrap: wrap;
         justify-content: center;
@@ -175,6 +213,44 @@
       }
     }
 
+    // Fields leave the bar for full-width lines under it. The empty ::before keeps the bar's line at full height.
+    @container x-header (width < 1200px) {
+      &--inline .x-header__inner:has(> .x-header__fields) {
+        flex-wrap: wrap;
+        row-gap: 0;
+
+        &::before {
+          content: '';
+          height: var(--x-header-height);
+          margin-right: calc(-1 * var(--x-header-gap));
+        }
+
+        // A zero basis keeps the brand from pushing the actions or the menu toggle off the bar's line.
+        > .x-header__brand {
+          flex: 1 1 0;
+          max-width: max-content;
+        }
+      }
+
+      &--inline .x-header__fields {
+        flex: 1 1 100%;
+        order: 1;
+        margin-left: 0;
+        padding-bottom: var(--x-space-4);
+      }
+
+      .x-header__fields {
+        > * {
+          flex: 1 1 auto;
+        }
+
+        // Touch target size: the controls here are the main way to change the page on a phone.
+        :is(.x-input, .x-select, .x-textarea, .x-button) {
+          min-height: 44px;
+        }
+      }
+    }
+
     @container x-header (width < 860px) {
       .x-header__nav {
         display: none;
@@ -186,7 +262,7 @@
 
       &--inline {
         .x-header__inner {
-          gap: var(--x-space-3);
+          --x-header-gap: var(--x-space-3);
         }
 
         .x-header__brand {

@@ -1,6 +1,6 @@
 ---
 import Harness from '../layouts/Harness.astro'
-import { Button, Header } from '@xaroth.nl/design/astro'
+import { Button, Field, Header, Input, Select } from '@xaroth.nl/design/astro'
 
 const layouts = ['stacked', 'inline'] as const
 const items = [
@@ -46,6 +46,24 @@ const items = [
               </Header>
             </div>
           ))}
+          <Header items={items.slice(0, 2)} brandHref="#">
+            <span slot="brand">Site name</span>
+            <Fragment slot="fields">
+              <Field id={`${theme}-build`} label="Build" layout="inline">
+                <Input value="Righteous Fire" size="14" />
+              </Field>
+              <Field id={`${theme}-level`} label="Level" layout="inline">
+                <Select>
+                  <option>90</option>
+                  <option>100</option>
+                </Select>
+              </Field>
+            </Fragment>
+            <Button slot="actions" variant="secondary" size="sm" href="#signin">
+              Sign in
+            </Button>
+            <Fragment slot="notice">Stats are worked out for level 90.</Fragment>
+          </Header>
     </div>
   )}
   <Fragment slot="end">
