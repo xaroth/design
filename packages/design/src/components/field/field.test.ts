@@ -149,6 +149,12 @@ describe('Field', () => {
     ['required', { id: 'email', label: 'Email', required: true }],
     ['no label, extra class', { id: 'q', class: 'site-field' }],
     ['empty error is absent', { id: 'q', label: 'Q', error: '' }],
+    ['stacked layout given', { id: 'name', label: 'Name', layout: 'stacked' }],
+    ['inline', { id: 'level', label: 'Level', layout: 'inline' }],
+    [
+      'inline with description and error',
+      { id: 'lv', label: 'Level', description: '1 to 100', error: 'Too high', layout: 'inline' },
+    ],
   ]
 
   for (const [name, props] of cases) {
@@ -222,6 +228,19 @@ describe('Field', () => {
       AstroField,
       { props, slots: { default: control } },
       createElement(Field, props as never, createElement(Input, { name: 'n' })),
+    )
+  })
+
+  it('inline around Select', async () => {
+    const control = await container.renderToString(AstroSelect, {
+      props: { name: 'class' },
+      slots: { default: options },
+    })
+    const props = { id: 'class', label: 'Class', layout: 'inline', error: 'Pick a class' }
+    await expectSameHtml(
+      AstroField,
+      { props, slots: { default: control } },
+      createElement(Field, props as never, createElement(Select, { name: 'class' }, reactOptions)),
     )
   })
 

@@ -28,6 +28,7 @@ import {
   type ChoiceKind,
   type InputType,
   type ChoiceGroupOrientation,
+  type FieldLayout,
 } from './index.ts'
 
 // Matches Astro, where an empty string prop counts as absent.
@@ -47,11 +48,13 @@ export type FieldProps = Omit<HTMLAttributes<HTMLDivElement>, 'id'> & {
   description?: ReactNode
   error?: ReactNode
   required?: boolean
+  /** `inline` puts the label and the control on one row, the control at its own width. */
+  layout?: FieldLayout
   /** One control: Input, Textarea, Select, Checkbox, Switch or a native control. Field sets its id and aria. */
   children: ReactElement
 }
 
-export function Field({ id, label, description, error, required, className, children, ...rest }: FieldProps) {
+export function Field({ id, label, description, error, required, layout, className, children, ...rest }: FieldProps) {
   const hasDescription = present(description)
   const hasError = present(error)
   const ids = fieldIds(id)
@@ -68,7 +71,7 @@ export function Field({ id, label, description, error, required, className, chil
   return (
     <div
       {...rest}
-      className={fieldClass({ invalid: hasError, className })}
+      className={fieldClass({ layout, invalid: hasError, className })}
     >
       {present(label) && (
         <label

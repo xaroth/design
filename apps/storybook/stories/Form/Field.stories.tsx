@@ -11,12 +11,14 @@ const meta = {
     description: 'As shown in the character sheet.',
     error: '',
     required: false,
+    layout: 'stacked',
     children: <Input placeholder="Xaroth Brook" />,
   },
   argTypes: {
     label: { control: 'text' },
     description: { control: 'text' },
     error: { control: 'text' },
+    layout: { control: 'inline-radio', options: ['stacked', 'inline'] },
     children: { control: false },
   },
 } satisfies Meta<typeof Field>
@@ -133,6 +135,80 @@ export const States: StoryObj<typeof meta> = {
           defaultValue="2112625428"
           readOnly
         />
+      </Field>
+    </div>
+  ),
+}
+
+const levels = (
+  <Select defaultValue="90">
+    <option>80</option>
+    <option>90</option>
+    <option>100</option>
+  </Select>
+)
+
+// The control keeps its own width; help and error sit under the row.
+export const Inline: StoryObj<typeof meta> = {
+  parameters: matrix,
+  render: () => (
+    <div className="x-stack-lg">
+      <Field
+        id="i-select"
+        label="Level"
+        layout="inline"
+      >
+        {levels}
+      </Field>
+      <Field
+        id="i-input"
+        label="Build name"
+        layout="inline"
+      >
+        <Input defaultValue="Righteous Fire Juggernaut" />
+      </Field>
+      <Field
+        id="i-select-help"
+        label="Level"
+        layout="inline"
+        description="The level the stats are worked out for."
+      >
+        {levels}
+      </Field>
+      <Field
+        id="i-input-help"
+        label="Build name"
+        layout="inline"
+        description="Shown in the build list."
+      >
+        <Input defaultValue="Righteous Fire Juggernaut" />
+      </Field>
+      <Field
+        id="i-select-error"
+        label="Level"
+        layout="inline"
+        description="The level the stats are worked out for."
+        error="Pick a level from 1 to 100."
+        required
+      >
+        <Select defaultValue="">
+          <option
+            value=""
+            disabled
+          >
+            Pick
+          </option>
+          <option>90</option>
+        </Select>
+      </Field>
+      <Field
+        id="i-input-error"
+        label="Build name"
+        layout="inline"
+        error="Give the build a name."
+        required
+      >
+        <Input defaultValue="" />
       </Field>
     </div>
   ),
