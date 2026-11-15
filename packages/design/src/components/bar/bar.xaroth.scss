@@ -1,0 +1,7 @@
+@use '../../styles/theme';
+
+@include theme.parts('xaroth') {
+  .x-bar__notice {
+    font-family: var(--x-font-body);
+  }
+}

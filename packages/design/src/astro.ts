@@ -2,6 +2,7 @@
 export { default as Alert } from './components/alert/alert.astro'
 export { default as Avatar } from './components/avatar/avatar.astro'
 export { default as Badge } from './components/badge/badge.astro'
+export { default as Bar } from './components/bar/bar.astro'
 export { default as Breadcrumbs } from './components/breadcrumbs/breadcrumbs.astro'
 export { default as Button } from './components/button/button.astro'
 export { default as Card } from './components/card/card.astro'

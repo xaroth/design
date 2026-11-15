@@ -1,0 +1,45 @@
+---
+import Harness from '../layouts/Harness.astro'
+import { Bar, Field, Input, Select, Tabs } from '@xaroth.nl/design/astro'
+
+const items = [
+  { label: 'Tree', href: '#tree', current: true },
+  { label: 'Items', href: '#items', count: 9 },
+  { label: 'Config', href: '#config' },
+]
+const widths = [
+  { id: 'wide', style: '' },
+  { id: 'narrow', style: 'max-width: 390px' },
+]
+---
+
+<Harness title="Bar">
+  {(theme: string) => (
+    <div style="display: grid; gap: 48px; padding-bottom: 48px">
+      {widths.map(({ id, style }) => (
+        <div style={style}>
+          <Bar>
+            <Tabs slot="start" label={`Build views, ${theme} ${id}`} items={items} />
+            <Fragment slot="end">
+              <Input aria-label="Build name" value="Lightning Arrow league start" size={22} />
+              <Field id={`bar-level-${theme}-${id}`} label="Level" layout="inline">
+                <Input type="number" min={1} max={100} value={92} size={4} />
+              </Field>
+              <Select aria-label="Class">
+                <option>Ranger</option>
+              </Select>
+              <Select aria-label="Ascendancy">
+                <option>Deadeye</option>
+                <option>No Ascendancy</option>
+              </Select>
+              <Select aria-label="Bloodline">
+                <option>No Bloodline</option>
+              </Select>
+            </Fragment>
+            <Fragment slot="notice">Changing the ascendancy resets the 6 points spent on Deadeye.</Fragment>
+          </Bar>
+        </div>
+      ))}
+    </div>
+  )}
+</Harness>

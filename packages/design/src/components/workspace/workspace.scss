@@ -21,6 +21,10 @@
       .x-header__inner {
         max-width: none;
       }
+
+      .x-bar {
+        --x-bar-width: 100%;
+      }
     }
 
     &__body {

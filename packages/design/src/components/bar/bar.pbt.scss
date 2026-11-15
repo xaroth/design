@@ -1,0 +1,11 @@
+@use '../../styles/theme';
+
+@include theme.parts('pbt') {
+  .x-bar {
+    --x-bar-bg: var(--x-color-bg);
+  }
+
+  .x-bar__notice {
+    color: var(--x-color-warning);
+  }
+}
