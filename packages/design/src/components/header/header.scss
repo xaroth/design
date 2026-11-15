@@ -109,7 +109,8 @@
         height: var(--x-header-height);
       }
 
-      .x-header__nav {
+      .x-header__nav,
+      .x-header__brand + .x-header__actions {
         margin-left: auto;
       }
 
