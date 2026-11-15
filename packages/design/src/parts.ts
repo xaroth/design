@@ -2,6 +2,7 @@
 export * from './components/alert/index.ts'
 export * from './components/avatar/index.ts'
 export * from './components/badge/index.ts'
+export * from './components/bar/index.ts'
 export * from './components/breadcrumbs/index.ts'
 export * from './components/button/index.ts'
 export * from './components/card/index.ts'
