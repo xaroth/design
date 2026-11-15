@@ -32,6 +32,12 @@ const grid = 'display: grid; gap: 24px; grid-template-columns: repeat(auto-fill,
                 </svg>
               </Input>
             </Field>
+            <Field id={`${theme}-inline`} label="Level" layout="inline" description="1 to 100">
+              <Select>
+                <option>90</option>
+                <option>100</option>
+              </Select>
+            </Field>
             <Field id={`${theme}-number`} label="Number">
               <Input type="number" value="42" min="0" />
             </Field>

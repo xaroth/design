@@ -1,5 +1,20 @@
 import { describe, expect, it } from 'vitest'
-import { choiceGroupAttrs, fieldControlAttrs, fieldIds, mergeDescribedBy, wireControlHtml } from './index.ts'
+import {
+  choiceGroupAttrs,
+  fieldClass,
+  fieldControlAttrs,
+  fieldIds,
+  mergeDescribedBy,
+  wireControlHtml,
+} from './index.ts'
+
+describe('fieldClass', () => {
+  it('adds no class for the stacked default, so stacked fields keep their HTML', () => {
+    expect(fieldClass()).toBe('x-field')
+    expect(fieldClass({ layout: 'stacked', invalid: true })).toBe('x-field x-field--invalid')
+    expect(fieldClass({ layout: 'inline' })).toBe('x-field x-field--inline')
+  })
+})
 
 describe('field wiring', () => {
   it('derives help and error ids', () => {

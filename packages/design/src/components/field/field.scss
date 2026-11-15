@@ -99,6 +99,32 @@
       font-weight: 600;
       color: var(--x-color-danger);
     }
+
+    // Help and error take their own full lines under the row. When the row has no room, the control wraps under
+    // the label instead of overflowing.
+    &--inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--x-space-2) var(--x-space-3);
+      align-items: center;
+
+      > .x-input,
+      > .x-input-wrap,
+      > .x-select,
+      > .x-textarea {
+        flex: 0 1 auto;
+        width: auto;
+      }
+
+      > .x-input-wrap > .x-input {
+        width: auto;
+      }
+
+      > .x-field__help,
+      > .x-field__error {
+        flex-basis: 100%;
+      }
+    }
   }
 
   .x-input,

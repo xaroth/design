@@ -6,6 +6,8 @@ import { getAttr, mergeTokens, rewriteTag } from '../../html.ts'
 
 export type InputType = 'text' | 'email' | 'search' | 'number' | 'password' | 'url' | 'tel'
 export type ChoiceGroupOrientation = 'vertical' | 'horizontal'
+// stacked: label over the control at full width. inline: label and control on one row, the control at its own width.
+export type FieldLayout = 'stacked' | 'inline'
 
 export const fieldIds = (id: string) => ({ help: `${id}-help`, error: `${id}-error` })
 
@@ -28,14 +30,17 @@ export const fieldControlAttrs = ({ id, hasDescription, hasError, required }: Fi
   }
 }
 
-const field = bem('x-field')
+const field = bem('x-field', { defaults: { layout: 'stacked' } })
 const input = bem('x-input')
 const textarea = bem('x-textarea')
 const select = bem('x-select')
 const choiceGroup = bem('x-choice-group', { defaults: { orientation: 'vertical' } })
 
-export const fieldClass = ({ invalid, className }: { invalid?: boolean; className?: string } = {}) =>
-  field({ invalid }, className)
+export const fieldClass = ({
+  layout = 'stacked',
+  invalid,
+  className,
+}: { layout?: FieldLayout; invalid?: boolean; className?: string } = {}) => field({ layout, invalid }, className)
 
 export const inputClass = ({ hasStart, className }: { hasStart?: boolean; className?: string } = {}) =>
   input({ start: hasStart }, className)
