@@ -1,5 +1,27 @@
 # @xaroth.nl/design
 
+## 0.13.0
+
+### Minor Changes
+
+- [#65](https://github.com/xaroth/design/pull/65)
+  [`6391893`](https://github.com/xaroth/design/commit/6391893a3adc6502800108840764a7d2b1db676e) - New `Bar` part for a
+  bar under the header: navigation at the start (`start`), fields right aligned at the end (`end`), a line under it, and
+  a polite live region under the bar for one short `notice`. The live region is always rendered, so a notice that
+  appears or changes later is announced. Below 720px of its own width the fields come first, on as many lines as they
+  need, and the navigation under them.
+
+- [#62](https://github.com/xaroth/design/pull/62)
+  [`78fafa4`](https://github.com/xaroth/design/commit/78fafa482be8b486595497db8e0e4f29584ccbd6) - Field takes
+  `layout="inline"`: the label and the control on one row, the control at its own width, help and error under the row.
+  Stacked stays the default and renders the same HTML as before.
+
+### Patch Changes
+
+- [#65](https://github.com/xaroth/design/pull/65)
+  [`6391893`](https://github.com/xaroth/design/commit/6391893a3adc6502800108840764a7d2b1db676e) - Header (inline):
+  actions sit at the right end of the bar when there is no navigation, as they already did on narrow bars.
+
 ## 0.12.1
 
 ### Patch Changes
