@@ -1,5 +1,15 @@
 # @xaroth.nl/design
 
+## 0.13.1
+
+### Patch Changes
+
+- [#69](https://github.com/xaroth/design/pull/69)
+  [`edd78b0`](https://github.com/xaroth/design/commit/edd78b046d013a25e683dafc2b9c642e269a0c4d) - Modal and Dialog
+  ignore the cancel and close events of a dialog nested in them, so Escape closes only the top one. Closing returns
+  focus to the element that opened it. The dialog resets the text alignment, white space, weight, transform and letter
+  spacing it would inherit from where it is mounted.
+
 ## 0.13.0
 
 ### Minor Changes
