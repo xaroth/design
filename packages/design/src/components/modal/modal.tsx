@@ -38,12 +38,26 @@ export function Modal({
   const dialog = useRef<HTMLDialogElement>(null)
   useImperativeHandle(ref, () => dialog.current as HTMLDialogElement, [])
 
+  // Safari does not focus a clicked button, so the browser's own restore can land on the body. The element
+  // focused at open is kept and refocused on close.
+  const opener = useRef<HTMLElement | null>(null)
+
   useEffect(() => {
     const el = dialog.current
     if (open && el && !el.open) {
+      opener.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
       el.showModal()
-    } else if (!open && el?.open) {
-      el.close()
+    } else if (!open) {
+      if (el?.open) {
+        el.close()
+      }
+      const target = opener.current
+      opener.current = null
+      const active = document.activeElement
+      const lost = !active || active === document.body || el?.contains(active)
+      if (target?.isConnected && target !== document.body && lost) {
+        target.focus()
+      }
     }
   }, [open])
 
@@ -56,6 +70,10 @@ export function Modal({
       className={modalClass({ size, className })}
       onCancel={(event) => {
         onCancel?.(event)
+        // React bubbles a nested dialog's cancel and close through the component tree.
+        if (event.target !== event.currentTarget) {
+          return
+        }
         // The caller owns `open`, so the browser may not close it. A cancel the browser will not let us stop
         // closes the dialog anyway and is reported by the close event below.
         if (event.nativeEvent.cancelable) {
@@ -65,8 +83,8 @@ export function Modal({
           }
         }
       }}
-      onClose={() => {
-        if (open) {
+      onClose={(event) => {
+        if (open && event.target === event.currentTarget) {
           onClose()
         }
       }}

@@ -21,7 +21,12 @@
     padding: var(--x-modal-pad, var(--x-space-5));
     margin: auto;
     overflow: auto;
+    font-weight: 400;
     color: var(--x-color-text);
+    text-align: start;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: normal;
     background: var(--x-modal-bg, var(--x-color-surface-2));
     border: 1px solid var(--x-modal-edge, var(--x-color-line-strong));
     border-radius: var(--x-radius);
