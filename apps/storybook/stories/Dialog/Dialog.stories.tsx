@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useArgs } from 'storybook/preview-api'
-import { Button, Dialog } from '@xaroth.nl/design/react'
+import { useState } from 'react'
+import { Button, Dialog, Table } from '@xaroth.nl/design/react'
 import { InlineDialogs, matrix, Row, Rows } from '../shared.tsx'
 
 const actions = (
@@ -133,4 +134,74 @@ export const States: StoryObj<typeof meta> = {
       </Row>
     </Rows>
   ),
+}
+
+export const Mounted: StoryObj<typeof meta> = {
+  parameters: matrix,
+  render: () => (
+    <Rows>
+      <Row
+        label="Inside a table cell aligned to the end: text stays start aligned"
+        stack
+      >
+        <Table
+          label="Characters"
+          columns={[
+            { key: 'name', label: 'Character' },
+            { key: 'remove', label: 'Remove', align: 'end' },
+          ]}
+          rows={[
+            {
+              name: 'Xaroth Brook',
+              remove: (
+                <InlineDialogs>
+                  <Dialog
+                    {...closed}
+                    id="mounted-cell"
+                    title="Remove character"
+                  >
+                    Remove Xaroth Brook and its stored token? Its synced data is deleted too, and every fit that uses it
+                    loses its skills.
+                  </Dialog>
+                </InlineDialogs>
+              ),
+            },
+          ]}
+        />
+      </Row>
+    </Rows>
+  ),
+}
+
+export const Nested: StoryObj<typeof meta> = {
+  parameters: matrix,
+  render: function Render() {
+    const [outer, setOuter] = useState(false)
+    const [inner, setInner] = useState(false)
+    return (
+      <>
+        <Button
+          variant="secondary"
+          onClick={() => setOuter(true)}
+        >
+          Open outer dialog
+        </Button>
+        <Dialog
+          open={outer}
+          onClose={() => setOuter(false)}
+          title="Discard changes"
+          actions={<Button onClick={() => setInner(true)}>Export first</Button>}
+        >
+          Escape closes only the dialog on top, and focus returns to the button that opened it.
+          <Dialog
+            open={inner}
+            onClose={() => setInner(false)}
+            title="Export"
+          >
+            Export the fit before discarding it.
+          </Dialog>
+        </Dialog>
+      </>
+    )
+  },
 }
